@@ -20,6 +20,9 @@
       android:versionCode="14"
       android:versionName="@string/version_num"
       android:installLocation="auto">
+      
+      <!-- Used to autostart a home launcher -->
+	  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <!--  <uses-sdk android:minSdkVersion="5" android:targetSdkVersion="3"/> -->
     <uses-sdk android:minSdkVersion="4" />
@@ -64,6 +67,7 @@
             android:name=".MainBroadcastReceiver"
             android:enabled="true">
 			<intent-filter>
+	        	<action android:name="android.intent.action.BOOT_COMPLETED"></action>
 				<action android:name="com.twsitedapps.homemanager.action.NEXT"></action>
 				<action android:name="com.twsitedapps.homemanager.action..PREV"></action>
 			</intent-filter>
@@ -75,7 +79,7 @@
 	       android:name=".HomeAppWidgetProvider"
 	       android:label="@string/app_name">
 	       <intent-filter >
-	            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+	           <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
 	       </intent-filter>
 	
 	       <meta-data

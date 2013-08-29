@@ -83,18 +83,76 @@ public class MainBroadcastReceiver extends BroadcastReceiver
             e.printStackTrace();
         }
         
-        // When the device reboots start the noScrollService
+        // When the device reboots
         if ( intent.getAction().toString().equals( "android.intent.action.BOOT_COMPLETED" ) )
         {
-            // Do something we we decided to implement this feature
+            // XXX : Note this was a user request; to have
+            // THM launch one home activity, and then wait then launch another home activity.
+            // XXX : Currently I am not adding this to the master branch this was just a test
+            
+            // Build the intent to launch
+            Intent AppIntent = new Intent( Intent.ACTION_MAIN );
+            AppIntent.addCategory( Intent.CATEGORY_HOME );
+            //AppIntent.setPackage( "com.teslacoilsw.launcher" );
+            AppIntent.setPackage( "com.launcher" );
+            AppIntent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
+
+            // Make sure the selected application is Callable
+            if( HomeManagerActivity.isCallable( context, AppIntent ) )
+            {                           
+                // Start the selected application
+                context.startActivity( AppIntent );
+                Log.e( DEBUG_TAG, StaticConfig.TWISTED_TAG + "Launch - com.launcher" );
+            }
+            else
+            {
+                // Display user feedback if the home app is not callable
+                Toast.makeText( context.getApplicationContext(), context.getResources().getString(R.string.installed) + "com.launcher" + context.getResources().getString( R.string.not_callable ), Toast.LENGTH_SHORT ).show();
+                Log.e( DEBUG_TAG, StaticConfig.TWISTED_TAG + context.getResources().getString(R.string.installed) + "com.launcher" + context.getResources().getString( R.string.not_callable ) );
+            }
+            
+            new Thread( new Runnable() {
+                public void run()
+                {
+                    try
+                    {
+                        Thread.sleep( 5000 );
+                    }
+                    catch( InterruptedException e )
+                    {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    
+                    // Build the intent to launch
+                    Intent AppIntent = new Intent( Intent.ACTION_MAIN );
+                    AppIntent.addCategory( Intent.CATEGORY_HOME );
+                    //AppIntent.setPackage( "org.adw.launcher" );
+                    AppIntent.setPackage( "com.dlto.atom.launcher" );
+                    AppIntent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
+
+                    // Make sure the selected application is Callable
+                    if( HomeManagerActivity.isCallable( context, AppIntent ) )
+                    {                           
+                        // Start the selected application
+                        context.startActivity( AppIntent );
+                        Log.e( DEBUG_TAG, StaticConfig.TWISTED_TAG + "Launch - com.dlto.atom.launcher" );
+                    }
+                    else
+                    {
+                        // Display user feedback if the home app is not callable
+                        Toast.makeText( context.getApplicationContext(), StaticConfig.TWISTED_TAG + context.getResources().getString(R.string.installed) + "com.dlto.atom.launcher" + context.getResources().getString( R.string.not_callable ), Toast.LENGTH_SHORT ).show();
+                    }
+                    
+                }
+            } ).start();
+            
         }
         
         if ( intent.getAction().toString().equals( StaticConfig.NEXT_HOME ) )
         {
             try
             {               
-                // Set the Next Wallpaper
-                //WallpaperUtil.nextWallpaper( context );
                 try
                 {
                     // Get the name of the current selected home app
@@ -143,7 +201,6 @@ public class MainBroadcastReceiver extends BroadcastReceiver
                     Log.e( DEBUG_TAG, "Launch App : SecurityException" );
                     e.printStackTrace();
                 }
-
             }
             catch ( NullPointerException e )
             {
