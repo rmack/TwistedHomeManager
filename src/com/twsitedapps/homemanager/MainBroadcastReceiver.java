@@ -92,9 +92,7 @@ public class MainBroadcastReceiver extends BroadcastReceiver
         if ( intent.getAction().toString().equals( StaticConfig.NEXT_HOME ) )
         {
             try
-            {               
-                // Set the Next Wallpaper
-                //WallpaperUtil.nextWallpaper( context );
+            {
                 try
                 {
                     // Get the name of the current selected home app
@@ -160,8 +158,7 @@ public class MainBroadcastReceiver extends BroadcastReceiver
         {
             try
             {
-                // Set the Previous Wallpaper
-                //WallpaperUtil.previousWallpaper( context );
+                // TODO: Widget previous note widget was just a beta test
 
             }
             catch ( NullPointerException e )
