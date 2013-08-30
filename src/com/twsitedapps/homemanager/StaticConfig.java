@@ -144,5 +144,7 @@ public class StaticConfig
     public static final String      ZeamLauncher                = "market://search?q=org.zeam";
     public static final String      Launcher360Name             = "360 Launcher";
     public static final String      Launcher360                 = "market://search?q=com.qihoo360.launcher";
+    public static final String      launcher91Name             = "91 Launcher";
+    public static final String      launcher91                 = "market://search?q=com.nd.android.launcher91";
     
 } // End StaticConfig

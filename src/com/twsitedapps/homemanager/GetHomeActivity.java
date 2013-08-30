@@ -372,6 +372,7 @@ public class GetHomeActivity extends Activity
             tmpHashMap.put( StaticConfig.TagHome16Name, StaticConfig.TagHome16 );
             tmpHashMap.put( StaticConfig.TagHomeName, StaticConfig.TagHome );
             tmpHashMap.put( StaticConfig.Launcher360Name, StaticConfig.Launcher360 );
+            tmpHashMap.put( StaticConfig.launcher91Name, StaticConfig.launcher91 );
             
             for( String key : tmpHashMap.keySet()  )
             {
