@@ -42,6 +42,10 @@
                         android:summary="@string/BlogText"
                         android:key="blog" />
                 <Preference
+                        android:title="@string/Github"
+                        android:summary="@string/GithubText"
+                        android:key="github" />
+                <Preference
                         android:title="@string/Email"
                         android:summary="@string/EmailText"
                         android:key="supportEmail" />
