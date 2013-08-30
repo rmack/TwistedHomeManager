@@ -45,6 +45,7 @@ public class StaticConfig
     // External Location references
     public static final String      THM_URL                     = "http://www.twistedapps.org";
     public static final String      ROLL_URL                    = "http://www.twistedapps.org/?cat=192";
+    public static final String      GITHUB_URL                  = "https://github.com/rmack/TwistedHomeManager";
     public static final String      THM_BLOG                    = "http://www.twistedapps.org/?page_id=563";
     public static final String      THM_MRK                     = "market://search?q=com.twsitedapps.homemanager";
 
