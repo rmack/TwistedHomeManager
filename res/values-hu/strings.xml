@@ -48,6 +48,8 @@
     <!-- About -->
     <string name="About">Rólunk</string>
     <string name="CopyrightText">Copyright © 2010 Twisted Apps™ LLC</string>
+    <string name="Github">Open Source oldal</string>
+    <string name="GithubText">Open source url &#8230;</string> 
     <string name="Blog">Blog</string>
     <string name="BlogText">Blog mintegy Twisted Kezdőlap Manager, verzió, változások, segítség, stb &#8230;</string>
     <string name="Email">E-mail</string>

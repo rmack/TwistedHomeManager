@@ -48,6 +48,8 @@
     <!-- About -->
     <string name="About">約</string>
     <string name="CopyrightText">Copyright © 2010 Twisted Apps™ LLC</string>
+    <string name="Github">オープンソースサイト</string>
+    <string name="GithubText">オープンソースURL &#8230;</string> 
     <string name="Blog">ブログ</string>
     <string name="BlogText">ツイスト·ホーム·マネージャー、バージョン、変更、ヘルプなどについてのブログ &#8230;</string>
     <string name="Email">電子メール</string>
