@@ -73,6 +73,8 @@
     <!-- About -->
     <string name="About">About</string>
     <string name="CopyrightText">Copyright © 2010 Twisted Apps™ LLC</string>
+    <string name="Github">Open Source site</string>
+    <string name="GithubText">Open source url &#8230;</string>    
     <string name="Blog">Blog</string>
     <string name="BlogText">Blog about Twisted Home Manager, version, changes, help, etc &#8230;</string>
     <string name="Email">E-mail</string>
