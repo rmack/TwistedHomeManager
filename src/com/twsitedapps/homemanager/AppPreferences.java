@@ -133,6 +133,26 @@ public class AppPreferences extends PreferenceActivity
                 }
             } );
             
+            // Allow the user to see open source project
+            Preference github = (Preference) findPreference( "github" );
+            github.setOnPreferenceClickListener( new OnPreferenceClickListener()
+            {
+                public boolean onPreferenceClick( Preference preference )
+                {
+                    try
+                    {
+                        startActivity( new Intent( Intent.ACTION_VIEW, Uri.parse( StaticConfig.GITHUB_URL ) ) );
+                    }
+                    catch( NullPointerException e )
+                    {
+                        Log.e( DEBUG_TAG, StaticConfig.TWISTED_TAG + "github.setOnPreferenceClickListener : NullPointerException" );
+                        e.printStackTrace();
+                    }
+    
+                    return true;
+                }
+            } );
+            
             // Go to the Twisted home manager's Android Market location
             Preference market = (Preference) findPreference( "market" );
             market.setOnPreferenceClickListener( new OnPreferenceClickListener()
