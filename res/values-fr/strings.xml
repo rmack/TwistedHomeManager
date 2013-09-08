@@ -11,7 +11,7 @@
     <string name="not_callable"> est indisponible</string>
     <string name="market_failed">L'app n'a pu démarrer</string>
     <string name="default_set">Déjà définie</string>
-    <string name="please_wait">Listing en cours...</string>
+    <string name="please_wait">Listing en cours &#8230;</string>
     <string name="homeapp_info">Certaines apps n'apparaîtront pas sur le Play Store</string>
     <string name="installed"> (Installée)</string>
     <string name="notInstalled"> (Non Installée)</string>
