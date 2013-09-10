@@ -9,14 +9,14 @@
    
     <string name="set_preferences">Paramètres</string>
     <string name="not_callable"> est indisponible</string>
-    <string name="market_failed">L'app n'a pu démarrer</string>
+    <string name="market_failed">L\'app n\'a pu démarrer</string>
     <string name="default_set">Déjà définie</string>
     <string name="please_wait">Listing en cours &#8230;</string>
-    <string name="homeapp_info">Certaines apps n'apparaîtront pas sur le Play Store</string>
+    <string name="homeapp_info">Certaines apps n\'apparaîtront pas sur le Play Store</string>
     <string name="installed">(installée)</string>
     <string name="notInstalled">(Non Installée)</string>
     <string name="defaultValue">(Par Défaut)</string>
-    <string name="app">Nom : </string>
+    <string name="app">Nom: </string>
     <string name="noDefaultSet">Aucune Home définie</string>
     <string name="homeAppNotCallable">Erreur de disponibilité ?</string>
     <string name="securityException">Erreur de sécurité : THM ne possède pas les droits requis</string>
@@ -61,8 +61,8 @@
     <string name="Email">Contact</string>
     <string name="EmailText">Propositions, aide</string>
     <string name="Rollback">Rétrogradage</string>
-    <string name="RollbackText">Permet d'installer une version antérieure en cas de problème</string>
+    <string name="RollbackText">Permet d\'installer une version antérieure en cas de problème</string>
     <string name="Market">Play Store</string>
-    <string name="MarketText">Affiche la page Play Store de l'application : infos, vote, etc &#8230;</string>
+    <string name="MarketText">Affiche la page Play Store de l\'application : infos, vote, etc &#8230;</string>
     
 </resources>
