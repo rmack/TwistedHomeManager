@@ -13,9 +13,9 @@
     <string name="default_set">Déjà définie</string>
     <string name="please_wait">Listing en cours &#8230;</string>
     <string name="homeapp_info">Certaines apps n'apparaîtront pas sur le Play Store</string>
-    <string name="installed"> (Installée)</string>
-    <string name="notInstalled"> (Non Installée)</string>
-    <string name="defaultValue"> (Par Défaut)</string>
+    <string name="installed">(installée)</string>
+    <string name="notInstalled">(Non Installée)</string>
+    <string name="defaultValue">(Par Défaut)</string>
     <string name="app">Nom : </string>
     <string name="noDefaultSet">Aucune Home définie</string>
     <string name="homeAppNotCallable">Erreur de disponibilité ?</string>
@@ -41,7 +41,7 @@
     <string name="descending">Tri Descendant</string>
     <string name="DefaultValue">Par défaut</string>
     <string name="preferences">Paramètres</string>
-    <string name="Installed">Installée</string>
+    <string name="Installed">installée</string>
     <string name="NotInstalled">Non Installée</string>
     <string name="memory">Mémoire</string>
    
