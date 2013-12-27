@@ -79,6 +79,8 @@ public class StaticConfig
     public static final String      CrazyHomeLite               = "market://search?q=com.cdproductions.apps.crazyhomelite";
     public static final String      dxTopLiteName               = "dxTop Lite";
     public static final String      dxTopLite                   = "market://search?q=com.android.dxtop.demo.launcher";
+    public static final String      everythingHomeName          = "Everything Home";
+    public static final String      everythingHome              = "market://search?q=me.everything.launcher";
     public static final String      FastHomeName                = "FastHome";
     public static final String      FastHome                    = "market://search?q=com.bitzophrenic.android.FastHome";
     public static final String      GOLauncherEXName            = "GO Launcher EX";
