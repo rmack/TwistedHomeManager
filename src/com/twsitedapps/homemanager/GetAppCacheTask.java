@@ -265,6 +265,19 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
         Collections.sort( listAppInfo, AppInfo.NAME_ORDER );
         Collections.sort( listAppInfo, AppInfo.DEFAULT_ORDER );
         
+        // UnComment out to build list of names in the market
+        // Use script to format and put back into java code
+//        for ( int i = 0; i < listAppInfo.size(); i++ )
+//        {
+//            String appPkgNameVN   = listAppInfo.get( i ).getappName().trim().replaceAll( "\\W*", "" );
+//            String appNameVN      = listAppInfo.get( i ).getappName().trim().replaceAll( "\\W*", "" ) + "Name";
+//            String appNameValue   = listAppInfo.get( i ).getappName();
+//            String appPkgValue    = listAppInfo.get( i ).getpackageName().trim();
+//            Log.e( DEBUG_TAG, "public static final String      " + appNameVN + "       = \"" + appNameValue + "\";");
+//            Log.e( DEBUG_TAG, "public static final String      " + appPkgNameVN     + "       = \"market://search?q=" + appPkgValue + "\";");
+//            Log.e( DEBUG_TAG, "tmpHashMap.put( StaticConfig." + appNameVN + ", StaticConfig." + appPkgNameVN + " );" );
+//        }
+        
         if ( homeManagerArrayAdapter != null  )
         {
             homeManagerArrayAdapter.notifyDataSetChanged();

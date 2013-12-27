@@ -332,48 +332,58 @@ public class GetHomeActivity extends Activity
     {
         try
         {
-            // Create the array of Apps in the market
+            // Create the array of Apps in the market (App Name <key>; App Pkg name <value>)
             HashMap<String, String> tmpHashMap = new HashMap<String, String>();
+            tmpHashMap.put( StaticConfig.a360LauncherName, StaticConfig.a360Launcher );
+            tmpHashMap.put( StaticConfig.a91PandaHomeName, StaticConfig.a91PandaHome );
+            tmpHashMap.put( StaticConfig.AbodeName, StaticConfig.Abode );
             tmpHashMap.put( StaticConfig.ADWLauncherName, StaticConfig.ADWLauncher );
             tmpHashMap.put( StaticConfig.ApexLauncherName, StaticConfig.ApexLauncher );
+            tmpHashMap.put( StaticConfig.aShellName, StaticConfig.aShell );
             tmpHashMap.put( StaticConfig.AtomLauncherName, StaticConfig.AtomLauncher );
-            tmpHashMap.put( StaticConfig.BalancerName, StaticConfig.Balancer );
+            tmpHashMap.put( StaticConfig.BalancerLauncherName, StaticConfig.BalancerLauncher );
+            tmpHashMap.put( StaticConfig.BuzzLauncherName, StaticConfig.BuzzLauncher );
             tmpHashMap.put( StaticConfig.ClaystoneLauncherName, StaticConfig.ClaystoneLauncher );
             tmpHashMap.put( StaticConfig.CrazyHomeLiteName, StaticConfig.CrazyHomeLite );
             tmpHashMap.put( StaticConfig.dxTopLiteName, StaticConfig.dxTopLite );
-            tmpHashMap.put( StaticConfig.everythingHomeName, StaticConfig.everythingHome );
+            tmpHashMap.put( StaticConfig.EspierLauncherName, StaticConfig.EspierLauncher );
+            tmpHashMap.put( StaticConfig.EverythingHomeName, StaticConfig.EverythingHome );
+            tmpHashMap.put( StaticConfig.EZLauncherName, StaticConfig.EZLauncher );
             tmpHashMap.put( StaticConfig.FastHomeName, StaticConfig.FastHome );
+            tmpHashMap.put( StaticConfig.FinalLauncherName, StaticConfig.FinalLauncher );
             tmpHashMap.put( StaticConfig.GOLauncherEXName, StaticConfig.GOLauncherEX );
-            tmpHashMap.put( StaticConfig.HoneycombLauncherName, StaticConfig.HoneycombLauncher );
             tmpHashMap.put( StaticConfig.HiLauncherName, StaticConfig.HiLauncher );
+            tmpHashMap.put( StaticConfig.HoloLauncherHDName, StaticConfig.HoloLauncherHD );
             tmpHashMap.put( StaticConfig.HomeName, StaticConfig.Home );
             tmpHashMap.put( StaticConfig.homescreen3DfreeversionName, StaticConfig.homescreen3Dfreeversion );
-            tmpHashMap.put( StaticConfig.IceCreamSandwich4Name, StaticConfig.IceCreamSandwich4 );
             tmpHashMap.put( StaticConfig.iHomeName, StaticConfig.iHome );
-            tmpHashMap.put( StaticConfig.JellyBean41Name, StaticConfig.JellyBean41 );
-            tmpHashMap.put( StaticConfig.LauncherProName, StaticConfig.LauncherPro );
-            tmpHashMap.put( StaticConfig.LauncherName, StaticConfig.Launcher );
+            tmpHashMap.put( StaticConfig.KitKatLauncherName, StaticConfig.KitKatLauncher );
+            tmpHashMap.put( StaticConfig.Launcher360Name, StaticConfig.Launcher360 );
             tmpHashMap.put( StaticConfig.Launcher7Name, StaticConfig.Launcher7 );
+            tmpHashMap.put( StaticConfig.Launcher8freeName, StaticConfig.Launcher8free );
+            tmpHashMap.put( StaticConfig.launcher91Name, StaticConfig.launcher91 );
+            tmpHashMap.put( StaticConfig.LauncherName, StaticConfig.Launcher );
+            tmpHashMap.put( StaticConfig.LauncherProName, StaticConfig.LauncherPro );
+            tmpHashMap.put( StaticConfig.LightningLauncherName, StaticConfig.LightningLauncher );
             tmpHashMap.put( StaticConfig.LiveHomeName, StaticConfig.LiveHome );
+            tmpHashMap.put( StaticConfig.MetroUIName, StaticConfig.MetroUI );
+            tmpHashMap.put( StaticConfig.MiHomeName, StaticConfig.MiHome );
+            tmpHashMap.put( StaticConfig.MiniLauncherName, StaticConfig.MiniLauncher );
             tmpHashMap.put( StaticConfig.mooLauncherName, StaticConfig.mooLauncher );
             tmpHashMap.put( StaticConfig.MXHomeLauncherName, StaticConfig.MXHomeLauncher );
+            tmpHashMap.put( StaticConfig.MyHomeliteName, StaticConfig.MyHomelite );
             tmpHashMap.put( StaticConfig.MyLauncherName, StaticConfig.MyLauncher );
             tmpHashMap.put( StaticConfig.NemusLauncherName, StaticConfig.NemusLauncher );
             tmpHashMap.put( StaticConfig.NovaLauncherName, StaticConfig.NovaLauncher );
-            tmpHashMap.put( StaticConfig.MetroUIName, StaticConfig.MetroUI );
-            tmpHashMap.put( StaticConfig.MyHomeliteName, StaticConfig.MyHomelite );
-            //tmpHashMap.put( StaticConfig.OpenHome6Name, StaticConfig.OpenHome6 );
-            tmpHashMap.put( StaticConfig.PandaHomeName, StaticConfig.PandaHome );
+            tmpHashMap.put( StaticConfig.QQlauncherName, StaticConfig.QQlauncher );
             tmpHashMap.put( StaticConfig.QuickLaunchHomeName, StaticConfig.QuickLaunchHome );
-            tmpHashMap.put( StaticConfig.QQLauncherProName, StaticConfig.QQLauncherPro );
             tmpHashMap.put( StaticConfig.ReginaLauncherName, StaticConfig.ReginaLauncher );
             tmpHashMap.put( StaticConfig.SimpleHomeLiteName, StaticConfig.SimpleHomeLite );
+            tmpHashMap.put( StaticConfig.SimpleHomeName, StaticConfig.SimpleHome );
             tmpHashMap.put( StaticConfig.SmartLauncherName, StaticConfig.SmartLauncher );
-            tmpHashMap.put( StaticConfig.TagHome22Name, StaticConfig.TagHome22 );
-            tmpHashMap.put( StaticConfig.TagHome16Name, StaticConfig.TagHome16 );
             tmpHashMap.put( StaticConfig.TagHomeName, StaticConfig.TagHome );
-            tmpHashMap.put( StaticConfig.Launcher360Name, StaticConfig.Launcher360 );
-            tmpHashMap.put( StaticConfig.launcher91Name, StaticConfig.launcher91 );
+            tmpHashMap.put( StaticConfig.TrebuchetName, StaticConfig.Trebuchet );
+            tmpHashMap.put( StaticConfig.ZeamLauncherName, StaticConfig.ZeamLauncher );
             
             for( String key : tmpHashMap.keySet()  )
             {

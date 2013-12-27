@@ -146,7 +146,6 @@ public class HomeManagerArrayAdapter extends ArrayAdapter<AppInfo>
         // Only if the list of apps is not null display the contents
         if( listAppInfo != null )
         {
-            Log.e( DEBUG_TAG, "Package Name: [" + listAppInfo.get( position ).getpackageName() + "]" );
             try
             {
                 holder.txt_appName.setText( listAppInfo.get( position ).getappName().trim() );
