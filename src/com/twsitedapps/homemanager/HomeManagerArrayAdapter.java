@@ -103,6 +103,12 @@ public class HomeManagerArrayAdapter extends ArrayAdapter<AppInfo>
         // The memory of the application
         public TextView txt_memoryName;
         
+        // The permission tag
+        public TextView txt_permissiontag;
+        
+        // If the App has detected permissions
+        public TextView txt_permission;
+        
         // The Row RelativeLayout
         public LinearLayout ll;
         
@@ -133,6 +139,8 @@ public class HomeManagerArrayAdapter extends ArrayAdapter<AppInfo>
             holder.txt_versiontag = (TextView) rowView.findViewById( R.id.txt_versiontag );
             holder.txt_versionName = (TextView) rowView.findViewById( R.id.txt_version );
             holder.txt_memoryName = (TextView) rowView.findViewById( R.id.txt_memory );
+            holder.txt_permissiontag = (TextView) rowView.findViewById( R.id.txt_permissiontag );
+            holder.txt_permission = (TextView) rowView.findViewById( R.id.txt_permission );
             holder.iconDrawable = (ImageView) rowView.findViewById( R.id.appIconImageView );
             holder.ll = (LinearLayout) rowView.findViewById( R.id.mainlinearlayout );
             holder.txt_default = (TextView) rowView.findViewById( R.id.txt_default );
@@ -148,6 +156,11 @@ public class HomeManagerArrayAdapter extends ArrayAdapter<AppInfo>
         {
             try
             {
+                // Display permissions
+                boolean displayPermissions = false;
+                String permissions = "";
+                
+                // Display app values set
                 holder.txt_appName.setText( listAppInfo.get( position ).getappName().trim() );
                 holder.txt_versionName.setText( listAppInfo.get( position ).getversionName() );
                 holder.txt_memoryName.setText( listAppInfo.get( position ).getappMemory() );
@@ -155,121 +168,203 @@ public class HomeManagerArrayAdapter extends ArrayAdapter<AppInfo>
                 // Set the image if it was cached
                 holder.iconDrawable.setImageDrawable( listAppInfo.get( position ).geticonDrawable() );
                 
+                // If the app is the default app
+                if ( listAppInfo.get( position ).getIsDefault() )
+                {
+                    holder.txt_default.setText( context.getResources().getString( R.string.defaultValue ) );
+                    holder.txt_default.setVisibility( View.VISIBLE );
+                }
+                else
+                {
+                    holder.txt_default.setVisibility( View.INVISIBLE );
+                }
+                
+                // If the app has the permission to start at boot
+                if ( listAppInfo.get( position ).getstartAtBoot() )
+                {
+                    permissions = context.getResources().getString( R.string.startAtBoot );
+                    displayPermissions = true;
+                }
+                
+                // If the app has the permission to make Internet connections
+                if ( listAppInfo.get( position ).getWiFi() )
+                {
+                    // Add a comma if a permission already detected
+                    if ( displayPermissions )
+                    {
+                        permissions += ", ";
+                    }
+                    
+                    permissions += context.getResources().getString( R.string.wifi );
+                    displayPermissions = true;
+                }
+                
+                // If the app has the permission to read contacts
+                if ( listAppInfo.get( position ).getContacts() )
+                {
+                    // Add a comma if a permission already detected
+                    if ( displayPermissions )
+                    {
+                        permissions += ", ";
+                    }
+                    
+                    permissions += context.getResources().getString( R.string.contacts );
+                    displayPermissions = true;
+                }
+                
+                // If the app has the permission to read contacts
+                if ( listAppInfo.get( position ).getSMS() )
+                {
+                    // Add a comma if a permission already detected
+                    if ( displayPermissions )
+                    {
+                        permissions += ", ";
+                    }
+                    
+                    permissions += context.getResources().getString( R.string.sms );
+                    displayPermissions = true;
+                }
+                
+                // If a permission was found
+                if ( displayPermissions )
+                {
+                    holder.txt_permission.setVisibility( View.VISIBLE );
+                    holder.txt_permission.setText( permissions );
+                    holder.txt_permissiontag.setVisibility( View.VISIBLE );
+                }
+                else
+                {
+                    holder.txt_permission.setVisibility( View.INVISIBLE );
+                    holder.txt_permission.setText( "" );
+                    holder.txt_permissiontag.setVisibility( View.INVISIBLE );
+                }
+                
                 // If this is the default application
                 if( listAppInfo.get( position ).getIsDefault() )
                 {
                     if ( StaticConfig.theme == StaticConfig.BLACK )
                     {
-                        holder.txt_default.setText( context.getResources().getString( R.string.defaultValue ) );
                         holder.ll.setBackgroundColor( Color.WHITE );
                         holder.txt_apptag.setTextColor( Color.BLACK );
                         holder.txt_appName.setTextColor( Color.BLACK );
                         holder.txt_versiontag.setTextColor( Color.BLACK );
                         holder.txt_versionName.setTextColor( Color.BLACK );
+                        holder.txt_permissiontag.setTextColor( Color.BLACK );
                         holder.txt_memoryName.setTextColor( Color.RED );
+                        holder.txt_permission.setTextColor( Color.RED );
                     }
                     else if( StaticConfig.theme == StaticConfig.WHITE )
                     {
-                        holder.txt_default.setText( context.getResources().getString( R.string.defaultValue ) );
                         holder.ll.setBackgroundColor( Color.BLACK );
                         holder.txt_apptag.setTextColor( Color.WHITE );
                         holder.txt_appName.setTextColor( Color.WHITE );
                         holder.txt_versiontag.setTextColor( Color.WHITE );
                         holder.txt_versionName.setTextColor( Color.WHITE );
+                        holder.txt_permissiontag.setTextColor( Color.WHITE );
                         holder.txt_memoryName.setTextColor( Color.YELLOW );
+                        holder.txt_permission.setTextColor( Color.YELLOW );
                     }
                     else if( StaticConfig.theme == StaticConfig.GREY )
                     {
-                        holder.txt_default.setText( context.getResources().getString( R.string.defaultValue ) );
                         holder.ll.setBackgroundColor( Color.BLACK );
                         holder.txt_apptag.setTextColor( Color.DKGRAY );
                         holder.txt_appName.setTextColor( Color.DKGRAY );
                         holder.txt_versiontag.setTextColor( Color.DKGRAY );
                         holder.txt_versionName.setTextColor( Color.DKGRAY );
+                        holder.txt_permissiontag.setTextColor( Color.DKGRAY );
                         holder.txt_memoryName.setTextColor( Color.YELLOW );
+                        holder.txt_permission.setTextColor( Color.YELLOW );
                     }
                     else if( StaticConfig.theme == StaticConfig.CYAN )
                     {
-                        holder.txt_default.setText( context.getResources().getString( R.string.defaultValue ) );
                         holder.ll.setBackgroundColor( Color.BLACK );
                         holder.txt_apptag.setTextColor( Color.CYAN );
                         holder.txt_appName.setTextColor( Color.CYAN );
                         holder.txt_versiontag.setTextColor( Color.CYAN );
                         holder.txt_versionName.setTextColor( Color.CYAN );
-                        holder.txt_memoryName.setTextColor( Color.YELLOW );
+                        holder.txt_permissiontag.setTextColor( Color.CYAN );
+                        holder.txt_memoryName.setTextColor( Color.CYAN );
+                        holder.txt_permission.setTextColor( Color.CYAN );
                     }
                     else if( StaticConfig.theme == StaticConfig.GREEN )
                     {
-                        holder.txt_default.setText( context.getResources().getString( R.string.defaultValue ) );
                         holder.ll.setBackgroundColor( Color.BLACK );
                         holder.txt_apptag.setTextColor( Color.GREEN );
                         holder.txt_appName.setTextColor( Color.GREEN );
                         holder.txt_versiontag.setTextColor( Color.GREEN );
                         holder.txt_versionName.setTextColor( Color.GREEN );
+                        holder.txt_permissiontag.setTextColor( Color.GREEN );
                         holder.txt_memoryName.setTextColor( Color.YELLOW );
+                        holder.txt_permission.setTextColor( Color.YELLOW );
                     }
                     else if( StaticConfig.theme == StaticConfig.MAGENTA )
                     {
-                        holder.txt_default.setText( context.getResources().getString( R.string.defaultValue ) );
                         holder.ll.setBackgroundColor( Color.BLACK );
                         holder.txt_apptag.setTextColor( Color.MAGENTA );
                         holder.txt_appName.setTextColor( Color.MAGENTA );
                         holder.txt_versiontag.setTextColor( Color.MAGENTA );
                         holder.txt_versionName.setTextColor( Color.MAGENTA );
+                        holder.txt_permissiontag.setTextColor( Color.MAGENTA );
                         holder.txt_memoryName.setTextColor( Color.YELLOW );
+                        holder.txt_permission.setTextColor( Color.YELLOW );
                     }
                 }
                 else
                 {
                     if ( StaticConfig.theme == StaticConfig.BLACK )
                     {
-                        holder.txt_default.setText( "" );
                         holder.ll.setBackgroundColor( Color.BLACK );
                         holder.txt_apptag.setTextColor( Color.WHITE );
                         holder.txt_appName.setTextColor( Color.WHITE );
                         holder.txt_versiontag.setTextColor( Color.WHITE );
                         holder.txt_versionName.setTextColor( Color.WHITE );
+                        holder.txt_permissiontag.setTextColor( Color.WHITE );
                         holder.txt_memoryName.setTextColor( Color.YELLOW );
+                        holder.txt_permission.setTextColor( Color.YELLOW );
                     }
                     else if( StaticConfig.theme == StaticConfig.WHITE )
                     {
-                        holder.txt_default.setText( "" );
                         holder.ll.setBackgroundColor( Color.WHITE );
                         holder.txt_apptag.setTextColor( Color.BLACK );
                         holder.txt_appName.setTextColor( Color.BLACK );
                         holder.txt_versiontag.setTextColor( Color.BLACK );
                         holder.txt_versionName.setTextColor( Color.BLACK );
+                        holder.txt_permissiontag.setTextColor( Color.BLACK );
                         holder.txt_memoryName.setTextColor( Color.RED );
+                        holder.txt_permission.setTextColor( Color.RED );
                     }
                     else if( StaticConfig.theme == StaticConfig.GREY )
                     {
-                        holder.txt_default.setText( "" );
                         holder.ll.setBackgroundColor( Color.DKGRAY );
                         holder.txt_apptag.setTextColor( Color.BLACK );
                         holder.txt_appName.setTextColor( Color.BLACK );
                         holder.txt_versiontag.setTextColor( Color.BLACK );
                         holder.txt_versionName.setTextColor( Color.BLACK );
+                        holder.txt_permissiontag.setTextColor( Color.BLACK );
                         holder.txt_memoryName.setTextColor( Color.CYAN );
+                        holder.txt_permission.setTextColor( Color.CYAN );
                     }
                     else if( StaticConfig.theme == StaticConfig.CYAN )
                     {
-                        holder.txt_default.setText( "" );
                         holder.ll.setBackgroundColor( Color.CYAN );
                         holder.txt_apptag.setTextColor( Color.BLACK );
                         holder.txt_appName.setTextColor( Color.BLACK );
                         holder.txt_versiontag.setTextColor( Color.BLACK );
                         holder.txt_versionName.setTextColor( Color.BLACK );
+                        holder.txt_permissiontag.setTextColor( Color.BLACK );
                         holder.txt_memoryName.setTextColor( Color.RED );
+                        holder.txt_permission.setTextColor( Color.RED );
                     }
                     else if( StaticConfig.theme == StaticConfig.GREEN )
                     {
-                        holder.txt_default.setText( "" );
                         holder.ll.setBackgroundColor( Color.GREEN );
                         holder.txt_apptag.setTextColor( Color.BLACK );
                         holder.txt_appName.setTextColor( Color.BLACK );
                         holder.txt_versiontag.setTextColor( Color.BLACK );
                         holder.txt_versionName.setTextColor( Color.BLACK );
+                        holder.txt_permissiontag.setTextColor( Color.BLACK );
                         holder.txt_memoryName.setTextColor( Color.BLUE );
+                        holder.txt_permission.setTextColor( Color.BLUE );
                     }
                     else if( StaticConfig.theme == StaticConfig.MAGENTA )
                     {
@@ -279,7 +374,9 @@ public class HomeManagerArrayAdapter extends ArrayAdapter<AppInfo>
                         holder.txt_appName.setTextColor( Color.BLACK );
                         holder.txt_versiontag.setTextColor( Color.BLACK );
                         holder.txt_versionName.setTextColor( Color.BLACK );
+                        holder.txt_permissiontag.setTextColor( Color.BLACK );
                         holder.txt_memoryName.setTextColor( Color.WHITE );
+                        holder.txt_permission.setTextColor( Color.WHITE );
                     }
                 }
             }

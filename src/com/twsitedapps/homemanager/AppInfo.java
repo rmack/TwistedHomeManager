@@ -39,12 +39,16 @@ public class AppInfo implements Comparable<AppInfo>
     private static final String DEBUG_TAG                = "AppInfo";
 
     // Application metadata
-    private String              appName                  = null;
-    private String              versionName              = null;
-    private String              packageName              = null;
-    private String              appMemory                = null;
-    private Drawable            iconDrawable             = null;
-    private boolean             isDefault                = false;
+    private String              appName                  = null;  // Home App Name
+    private String              versionName              = null;  // Home App Version
+    private String              packageName              = null;  // Home App package name
+    private String              appMemory                = null;  // Home App snap shot memory
+    private Drawable            iconDrawable             = null;  // Home App Icon
+    private boolean             isDefault                = false; // If this home app is the default
+    private boolean             startAtBoot              = false; // If this home app starts upon reboot
+    private boolean             WiFi                     = false; // If this home app has full network access
+    private boolean             contacts                 = false; // If this home app can read contacts
+    private boolean             sms                      = false; // If this home app can read/receive SMS
 
 
     // ///////////////////////////////////////////////////////////////////
@@ -71,13 +75,27 @@ public class AppInfo implements Comparable<AppInfo>
      *            - String = The package name
      * @param iconDrawable
      *            - Drawable = The icon of the Application
+     * @param isDefault
+     *            - boolean = This app is the default
+     * @param startAtBoot
+     *            - boolean = This app will start upon reboot
+     * @param WiFi
+     *            - boolean = This app has wifi/network permission
+     * @param contacts
+     *            - boolean = This app has read contact permission
+     * @param sms
+     *            - boolean = This app has read sms permission
      */
     AppInfo( final String   appName,
              final String   versionName,
              final String   packageName,
              final String   appMemory,
              final Drawable iconDrawable,
-             final boolean  isDefault  )
+             final boolean  isDefault,
+             final boolean  startAtBoot,
+             final boolean  WiFi,
+             final boolean  contacts,
+             final boolean  sms )
     {
         this.appName      = appName;
         this.versionName  = versionName;
@@ -85,6 +103,10 @@ public class AppInfo implements Comparable<AppInfo>
         this.appMemory    = appMemory;
         this.iconDrawable = iconDrawable;
         this.isDefault    = isDefault;
+        this.startAtBoot  = startAtBoot;
+        this.WiFi         = WiFi;
+        this.contacts     = contacts;
+        this.sms          = sms;
     }
 
 
@@ -255,6 +277,46 @@ public class AppInfo implements Comparable<AppInfo>
     {
         this.appMemory = appMemory;
     }
+    
+    /*****************************************************************************
+     * setstartAtBoot - The app has the permission to start at reboot
+     * 
+     * @param startAtBoot - boolean - true or false
+     */
+    public void setstartAtBoot( final boolean startAtBoot )
+    {
+        this.startAtBoot = startAtBoot;
+    }
+    
+    /*****************************************************************************
+     * setWiFi - The app has the permission to use the network
+     * 
+     * @param WiFi - boolean - true or false
+     */
+    public void setWiFi( final boolean WiFi )
+    {
+        this.WiFi = WiFi;
+    }
+    
+    /*****************************************************************************
+     * setContacts - The app has the permission to read contacts
+     * 
+     * @param contacts - boolean - true or false
+     */
+    public void setContacts( final boolean contacts )
+    {
+        this.contacts = contacts;
+    }
+    
+    /*****************************************************************************
+     * setSMS - The app has the permission to read SMS
+     * 
+     * @param sms - boolean - true or false
+     */
+    public void setSMS( final boolean sms )
+    {
+        this.sms = sms;
+    }
 
     // -----------------------------------------------------------------------------
 
@@ -320,6 +382,45 @@ public class AppInfo implements Comparable<AppInfo>
         return ( this.iconDrawable );
     }
     
+    /*****************************************************************************
+     * getstartAtBoot - The app has the permission to start at reboot
+     * 
+     * @param startAtBoot - boolean - true or false
+     */
+    public boolean getstartAtBoot()
+    {
+        return ( this.startAtBoot );
+    }
+    
+    /*****************************************************************************
+     * getWiFi - The app has the permission to use the network
+     * 
+     * @param WiFi - boolean - true or false
+     */
+    public boolean getWiFi()
+    {
+        return ( this.WiFi );
+    }
+    
+    /*****************************************************************************
+     * getContacts - The app has the permission to read contacts
+     * 
+     * @param contacts - boolean - true or false
+     */
+    public boolean getContacts()
+    {
+        return ( this.contacts );
+    }
+    
+    /*****************************************************************************
+     * getSMS - The app has the permission to read SMS
+     * 
+     * @param sms - boolean - true or false
+     */
+    public boolean getSMS()
+    {
+        return ( this.sms );
+    }  
     
     /*****************************************************************************
      * public isValid - Check if this AppInfo is valid or not
@@ -354,6 +455,11 @@ public class AppInfo implements Comparable<AppInfo>
         this.packageName  = null;
         this.appMemory    = null;
         this.iconDrawable = null;
+        this.isDefault    = false;
+        this.startAtBoot  = false;
+        this.WiFi         = false;
+        this.contacts     = false;
+        this.sms          = false;
     } // End invaliiconDrawable
     
     /*****************************************************************************

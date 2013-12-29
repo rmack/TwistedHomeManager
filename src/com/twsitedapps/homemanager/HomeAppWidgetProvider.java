@@ -32,8 +32,10 @@ import android.widget.Toast;
  * HomeAppWidgetProvider - (Beta) - Manage the beta widget to change home
  * applications.  This was quickly hacked together for a widget.
  * 
- * IDEAS: 1. Notification to change home apps 2. Press home button and home apps
- * change 3. Visual widget
+ * IDEAS: <br>
+ * 1. Notification to change home apps <br>
+ * 2. Press home button and home apps change <br>
+ * 3. Visual widget <br>
  * 
  * @author Russell T Mackler
  * @version 1.0
@@ -45,9 +47,6 @@ public class HomeAppWidgetProvider extends AppWidgetProvider
 
     public static String                                       ACTION_NEXTHOME = "NextHome";
     public static String                                       ACTION_PREVHOME = "PrevHome";
-
-    private static int                                         NOTIFICATION_ID = 1;
-
 
     /*
      * (non-Javadoc)
@@ -93,20 +92,20 @@ public class HomeAppWidgetProvider extends AppWidgetProvider
 
             RemoteViews remoteViews = new RemoteViews( context.getPackageName(), R.layout.widget_layout );
 
-            Intent NextWallpaperIntent = new Intent( context, HomeAppWidgetProvider.class );
-            NextWallpaperIntent.setAction( ACTION_NEXTHOME );
-            NextWallpaperIntent.putExtra( "msg", context.getResources().getString( R.string.next ) );
+            Intent nextHomeAppIntent = new Intent( context, HomeAppWidgetProvider.class );
+            nextHomeAppIntent.setAction( ACTION_NEXTHOME );
+            nextHomeAppIntent.putExtra( "msg", context.getResources().getString( R.string.next ) );
 
-            Intent PrevWallpaperIntent = new Intent( context, HomeAppWidgetProvider.class );
-            PrevWallpaperIntent.setAction( ACTION_PREVHOME );
-            PrevWallpaperIntent.putExtra( "msg", context.getResources().getString( R.string.previous ) );
+            Intent prevHomeAppIntent = new Intent( context, HomeAppWidgetProvider.class );
+            prevHomeAppIntent.setAction( ACTION_PREVHOME );
+            prevHomeAppIntent.putExtra( "msg", context.getResources().getString( R.string.previous ) );
 
             //
-            PendingIntent NextWallpaperPendingIntent = PendingIntent.getBroadcast( context, 0, NextWallpaperIntent, 0 );
-            PendingIntent PrevWallpaperPendingIntent = PendingIntent.getBroadcast( context, 0, PrevWallpaperIntent, 0 );
+            PendingIntent nextHomeAppPendingIntent = PendingIntent.getBroadcast( context, 0, nextHomeAppIntent, 0 );
+            PendingIntent prevHomeAppPendingIntent = PendingIntent.getBroadcast( context, 0, prevHomeAppIntent, 0 );
 
-            remoteViews.setOnClickPendingIntent( R.id.buttonNextHomeApp, NextWallpaperPendingIntent );
-            remoteViews.setOnClickPendingIntent( R.id.buttonPreviousHomeApp, PrevWallpaperPendingIntent );
+            remoteViews.setOnClickPendingIntent( R.id.buttonNextHomeApp, nextHomeAppPendingIntent );
+            remoteViews.setOnClickPendingIntent( R.id.buttonPreviousHomeApp, prevHomeAppPendingIntent );
 
             appWidgetManager.updateAppWidget( widgetId, remoteViews );
         }
@@ -139,14 +138,14 @@ public class HomeAppWidgetProvider extends AppWidgetProvider
             {
                 Toast.makeText( context, context.getResources().getString( R.string.next ), Toast.LENGTH_SHORT ).show();
 
-                // Set the Next Wallpaper
+                // Set the Next Home app
                 context.sendBroadcast( new Intent( StaticConfig.NEXT_HOME ) );
             }
             else if( intent.getAction().equals( ACTION_PREVHOME ) )
             {
                 Toast.makeText( context, context.getResources().getString( R.string.previous ), Toast.LENGTH_SHORT ).show();
 
-                // Set the Previous Wallpaper
+                // Set the Previous Home app
                 context.sendBroadcast( new Intent( StaticConfig.PREV_HOME ) );
             }
             else
@@ -157,5 +156,5 @@ public class HomeAppWidgetProvider extends AppWidgetProvider
             super.onReceive( context, intent );
         }
     }
-} // End WallpaperWidgetProvider
+} // End HomeAppWidgetProvider
 // EOF

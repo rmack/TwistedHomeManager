@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -138,14 +139,54 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
                         memory = HomeManagerActivity.getPkgMemory( pidMap.get( defaultPackageName ), this.context );
                     }
                     
+                    // Permissions to display
+                    boolean startAtBoot = false;
+                    boolean WiFi = false;
+                    boolean contacts = false;
+                    boolean sms = false;
+                    
+                    // Check if the home app will start at boot
+                    if ( pm.checkPermission( Manifest.permission.RECEIVE_BOOT_COMPLETED, defaultPackageName ) == PackageManager.PERMISSION_GRANTED )
+                    {
+                        startAtBoot = true;
+                    }
+                    
+                    // Check if the app has network permissions
+                    if ( pm.checkPermission( Manifest.permission.INTERNET, defaultPackageName ) == PackageManager.PERMISSION_GRANTED )
+                    {
+                        WiFi = true;
+                    }
+                    
+                    // Check if the app has the permission to read contacts
+                    if ( pm.checkPermission( Manifest.permission.READ_CONTACTS, defaultPackageName ) == PackageManager.PERMISSION_GRANTED )
+                    {
+                        contacts = true;
+                    }
+                    
+                    // Check if the app has the permission to read sms messages
+                    if ( pm.checkPermission( Manifest.permission.READ_SMS, defaultPackageName ) == PackageManager.PERMISSION_GRANTED  ||
+                         pm.checkPermission( Manifest.permission.RECEIVE_SMS, defaultPackageName ) == PackageManager.PERMISSION_GRANTED )
+                    {
+                        sms = true;
+                    }
+                                        
                     // Create the default AppInfo object
-                    AppInfo appInfo = new AppInfo( appName, versionName, defaultPackageName, String.valueOf( memory ) + "M", iconDrawable, isDefaultApp );
+                    AppInfo appInfo = new AppInfo( appName,
+                                                   versionName,
+                                                   defaultPackageName,
+                                                   String.valueOf( memory ) + "M",
+                                                   iconDrawable,
+                                                   isDefaultApp,
+                                                   startAtBoot,
+                                                   WiFi,
+                                                   contacts,
+                                                   sms );
                     
                     // Place the AppInfo within the map
                     HashMap<String, AppInfo> map = new HashMap<String, AppInfo>();
                     map.put( Integer.toString( 0 ), appInfo );
 
-                    // Publish to create the cache
+                    // Push the App on to the stack
                     publishProgress( map );
                 }
                 catch( NameNotFoundException e )
@@ -163,7 +204,7 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
                     // Get PackageName
                     String packageName = installedHomeApps.get( i ).activityInfo.packageName;
                     
-                    // Check is this is the Preferred Package
+                    // Do not allow the Preferred Package
                     if ( !packageName.equals( defaultPackageName ))
                     {
                         // This should never be the default home app
@@ -178,6 +219,37 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
                         // Get Application versionName
                         String versionName = pm.getPackageInfo( packageName, PackageManager.SIGNATURE_MATCH ).versionName;
                         
+                        // Permissions to display
+                        boolean startAtBoot = false;
+                        boolean WiFi = false;
+                        boolean contacts = false;
+                        boolean sms = false;
+                        
+                        // Check if the home app will start at boot
+                        if ( pm.checkPermission( Manifest.permission.RECEIVE_BOOT_COMPLETED, packageName ) == PackageManager.PERMISSION_GRANTED )
+                        {
+                            startAtBoot = true;
+                        }
+                        
+                        // Check if the app has network permissions
+                        if ( pm.checkPermission( Manifest.permission.INTERNET, packageName ) == 0 )
+                        {
+                            WiFi = true;
+                        }
+                        
+                        // Check if the app has network permissions
+                        if ( pm.checkPermission( Manifest.permission.READ_CONTACTS, packageName ) == PackageManager.PERMISSION_GRANTED )
+                        {
+                            contacts = true;
+                        }
+                        
+                        // Check if the app has the permission to read sms messages
+                        if ( pm.checkPermission( Manifest.permission.READ_SMS, packageName )    == PackageManager.PERMISSION_GRANTED ||
+                             pm.checkPermission( Manifest.permission.RECEIVE_SMS, packageName ) == PackageManager.PERMISSION_GRANTED )
+                        {
+                            sms = true;
+                        }
+                        
                         // Get this packages memory if it is running
                         int memory = 0;
                         if ( pidMap.get( packageName ) != null )
@@ -185,12 +257,22 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
                             memory = HomeManagerActivity.getPkgMemory( pidMap.get( packageName ), this.context );
                         }
                         
-                        AppInfo appInfo = new AppInfo( appName, versionName, packageName, String.valueOf( memory ) + "M", iconDrawable, isDefaultApp );
+                        AppInfo appInfo = new AppInfo( appName,
+                                                       versionName,
+                                                       packageName,
+                                                       String.valueOf( memory ) + "M",
+                                                       iconDrawable,
+                                                       isDefaultApp,
+                                                       startAtBoot,
+                                                       WiFi,
+                                                       contacts,
+                                                       sms );
                         
                         // Place the AppInfo within the map
                         HashMap<String, AppInfo> map = new HashMap<String, AppInfo>();
                         map.put( Integer.toString( i ), appInfo );
 
+                        // Push the App on to the stack
                         publishProgress( map );
                     } // End if ( !packageName.equals( defaultPackageName ))
                 }

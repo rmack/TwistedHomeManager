@@ -13,7 +13,6 @@
     <string name="installed"> (インストールされて)</string>
     <string name="notInstalled"> (インストールされていません)</string>
     <string name="defaultValue"> (既定)</string>
-    <string name="app">アプリ: </string>
     <string name="noDefaultSet">既定設定されていない</string>
     <string name="homeAppNotCallable">エラーコーリングホームアプリケーション?</string>
     <string name="securityException">セキュリティ例外: に正しい権限を持っていません</string>
@@ -21,6 +20,12 @@
     <string name="setDefault">セット</string>
     <string name="clearDefault">クリア</string>
     <string name="getHome">得る</string>
+    <string name="startAtBoot">自動実行する</string>
+    <string name="wifi">WiFi</string>
+    <string name="contacts">コンタクト</string>
+    <string name="app">アプリ:</string>
+    <string name="version">バージョン:</string>
+    <string name="permission">パーミッション:</string>
     
     <!-- Array -->
     <string name="Black">ブラック</string>

@@ -38,11 +38,12 @@
 		    android:scaleType="centerCrop"
 		    android:layout_marginLeft="5dp"
 		    android:cropToPadding="true"
+		    android:gravity="center"
 		    android:paddingRight="3dp" />
 
 		<TableLayout
 		    android:layout_width="wrap_content"
-		    android:layout_height="match_parent"
+		    android:layout_height="wrap_content"
 		    android:layout_marginRight="5dp" >
 
 		    <TableRow
@@ -54,8 +55,7 @@
 		            android:id="@+id/txt_apptag"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
-		            android:paddingBottom="5dp"
-		            android:text="App:"
+		            android:text="@string/app"
 		            android:textColor="#FFFFFF" />
 
 		    </TableRow>
@@ -69,10 +69,26 @@
 		            android:id="@+id/txt_versiontag"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
-		            android:text="Version:"
+		            android:text="@string/version"
 		            android:textColor="#FFFFFF" />
 
 		    </TableRow>
+		    
+		    <TableRow
+		        android:id="@+id/tableRow3"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content" >
+
+		        <TextView
+		            android:id="@+id/txt_permissiontag"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/permission"
+		            android:paddingBottom="5dp"
+		            android:textColor="#FFFFFF" />
+
+		    </TableRow>
+		    
 		</TableLayout>
 
 		<TableLayout
@@ -81,7 +97,7 @@
 		    android:layout_weight="1.85" >
 
 		    <TableRow
-		        android:id="@+id/tableRow3"
+		        android:id="@+id/tableRow4"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content" >
 
@@ -89,22 +105,22 @@
 		            android:id="@+id/txt_app"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
-		            android:paddingBottom="5dp"
 		            android:textColor="#FFFFFF"
-		            android:textStyle="bold" />
+		            android:textStyle="bold"
+		            android:singleLine="true" />
 
 		        <TextView
 		            android:id="@+id/txt_default"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
-		            android:paddingBottom="5dp"
 		            android:paddingLeft="3dp"
-		            android:textColor="#FF0000" />
+		            android:textColor="#FF0000"
+		            android:singleLine="true" />
 
 		    </TableRow>
 
 		    <TableRow
-		        android:id="@+id/tableRow4"
+		        android:id="@+id/tableRow5"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content" >
 
@@ -113,9 +129,26 @@
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
 		            android:textColor="#FFFFFF"
-		            android:textStyle="italic" />
+		            android:textStyle="italic"
+		            android:singleLine="true" />
 
 		    </TableRow>
+		    
+		   <TableRow
+		        android:id="@+id/tableRow6"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content" >
+		        
+		        <TextView
+		        	android:id="@+id/txt_permission"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:paddingBottom="5dp"
+		            android:textColor="#FFFFFF"
+		            android:singleLine="true" />
+
+		    </TableRow>
+		    
 		</TableLayout>
 
 		<TableLayout
@@ -124,7 +157,7 @@
 		    android:layout_gravity="center" >
 
 		    <TableRow
-		        android:id="@+id/tableRow5"
+		        android:id="@+id/tableRow7"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_gravity="right" >
@@ -140,10 +173,12 @@
 		    </TableRow>
 
 		    <TableRow
-		        android:id="@+id/tableRow6"
+		        android:id="@+id/tableRow8"
 		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content" >
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="right" >
 		    </TableRow>
+		    
 		</TableLayout>
 
 	</LinearLayout>

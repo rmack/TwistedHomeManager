@@ -13,7 +13,6 @@
     <string name="installed"> (Installiert)</string>
     <string name="notInstalled"> (Nicht Installiert)</string>
     <string name="defaultValue"> (Voreinstellung)</string>
-    <string name="app">App: </string>
     <string name="noDefaultSet">Voreinstellung nicht festgelegt</string>
     <string name="homeAppNotCallable">Fehler: Home-App nicht aufrufbar?</string>
     <string name="securityException">Schutzverletzung : THM hat nicht die richtigen Berechtigungen</string>
@@ -21,6 +20,12 @@
     <string name="setDefault">Voreinstellungen setzen</string>
     <string name="clearDefault">Voreinstellungen löschen</string>
     <string name="getHome">Get Home</string>
+    <string name="startAtBoot">Autorun</string>
+    <string name="wifi">WiFi</string>
+    <string name="contacts">Kontakte</string>
+    <string name="app">App:</string>
+    <string name="version">Version:</string>
+    <string name="permission">Erlaubnis:</string>
     
     <!-- Array -->
     <string name="Black">Schwarz</string>
