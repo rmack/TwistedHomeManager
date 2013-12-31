@@ -14,7 +14,7 @@ License: http://www.apache.org/licenses/LICENSE-2.0
 What is a Home App?
 ===================
 
-A Home App, or sometimes called a “Launcher” is the main UI (User’s Interface) displayed after
+A Home App, or sometimes called a "Launcher" is the main UI (User's Interface) displayed after
 hitting the Home button. This UI should let you access all of the other features on your Android
 Device. The reason to change to a new Home App depends on an individuals customization preference
 on how they would like their device to function and look. If you are familiar with the Desktop
@@ -24,9 +24,13 @@ Show Home App memory usage if the Home App is running.
 
 The following options are supported:
 
+    Notification:
+    	Quickly change to a new home app
+    	Clear the Notification
+    	Disable the Notification
     Clear Default:
         This action will take you to the Installed App details; which will allow you to select
-        “Clear Defaults”. Then hit the back button to get back to THM.
+        "Clear Defaults". Then hit the back button to get back to THM.
     Set Default:
         This action will bring up a dialog to select an installed Home App and set it as the default.
     Get Home:
@@ -41,6 +45,8 @@ The following options are supported:
     Sort:
         By pressing Menu you will be presented with sort options.
     Preferences:
+        Disable or Enable the "Quick Select" Notification to select a new home app
+        Language
         Currently the preferences will allow you to change between these themes:
             Black
             White
@@ -55,7 +61,7 @@ The following options are supported:
 NOTE: If there is a home app that is missing from the list and you feel it should be added then please send
 an e-mail to twistedapps@twistedapps.org
 
-NOTE: Twisted Apps doesn’t support any of the Home Apps which are referenced through Twisted home Manager.
+NOTE: Twisted Apps doesn't support any of the Home Apps which are referenced through Twisted home Manager.
 Nor does Twisted Apps guarantee that any of these Home Apps will function well on your device. They are only
 listed for convenience to find them on the Android Market to try them out.
 
