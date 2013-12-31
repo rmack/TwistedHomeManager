@@ -17,25 +17,15 @@
 
 package com.twsitedapps.homemanager;
 
-import java.util.ArrayList;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
-import android.widget.Toast;
 
 /*****************************************************************************
- * MainBroadcastReceiver - (Beta) - Manage the beta widget to change home
- * applications.  This was quickly hacked together for a widget.
- * 
- * IDEAS:
- * 1. Notification to change home apps
- * 2. Press home button and home apps change
- * 3. Visual widget
+ * MainBroadcastReceiver - (Beta) - This is a place holder for future work.
  * 
  * @author Russell T Mackler
- * @version 1.0
+ * @version 1.0.1.8
  * @since 1.0
  */
 public class MainBroadcastReceiver extends BroadcastReceiver
@@ -49,129 +39,52 @@ public class MainBroadcastReceiver extends BroadcastReceiver
     @Override public void onReceive( final Context context,
                                      Intent intent )
     {
-        try
-        {
-            // Get home applications
-            if ( HomeManagerActivity.listAppInfo != null )
-            {
-                if ( HomeManagerActivity.listAppInfo.isEmpty() )
-                {
-                    // Set this so we know the installed Home App list has been built
-                    HomeManagerActivity.isFinishedBuildingList = false;
-                    
-                    new GetAppCacheTask( context, HomeManagerActivity.listAppInfo, null, HomeManagerActivity.isFinishedBuildingList ).execute();
-                }
-            }
-            else
-            {
-                // Set this so we know the installed Home App list has been built
-                HomeManagerActivity.isFinishedBuildingList = false;
-                
-                // Create the cached ArrayList of home applications
-                HomeManagerActivity.listAppInfo = new ArrayList<AppInfo>();
-                new GetAppCacheTask( context, HomeManagerActivity.listAppInfo, null, HomeManagerActivity.isFinishedBuildingList ).execute();
-            }
-        }
-        catch( IllegalStateException e )
-        {
-            Log.e( DEBUG_TAG, StaticConfig.TWISTED_TAG + "onResume : IllegalStateException" );
-            e.printStackTrace();
-        }
-        catch( Exception e )
-        {
-            Log.e( DEBUG_TAG, StaticConfig.TWISTED_TAG + "onResume : Exception" );
-            e.printStackTrace();
-        }
+        // Future work
+//        try
+//        {
+//            // Get home applications
+//            if ( HomeManagerActivity.listAppInfo != null )
+//            {
+//                if ( HomeManagerActivity.listAppInfo.isEmpty() )
+//                {
+//                    // Set this so we know the installed Home App list has been built
+//                    HomeManagerActivity.isFinishedBuildingList = false;
+//                    
+//                    new GetAppCacheTask( context, HomeManagerActivity.listAppInfo, null, HomeManagerActivity.isFinishedBuildingList ).execute();
+//                }
+//            }
+//            else
+//            {
+//                // Set this so we know the installed Home App list has been built
+//                HomeManagerActivity.isFinishedBuildingList = false;
+//                
+//                // Create the cached ArrayList of home applications
+//                HomeManagerActivity.listAppInfo = new ArrayList<AppInfo>();
+//                new GetAppCacheTask( context, HomeManagerActivity.listAppInfo, null, HomeManagerActivity.isFinishedBuildingList ).execute();
+//            }
+//        }
+//        catch( IllegalStateException e )
+//        {
+//            Log.e( DEBUG_TAG, StaticConfig.TWISTED_TAG + "onResume : IllegalStateException" );
+//            e.printStackTrace();
+//        }
+//        catch( Exception e )
+//        {
+//            Log.e( DEBUG_TAG, StaticConfig.TWISTED_TAG + "onResume : Exception" );
+//            e.printStackTrace();
+//        }
         
-        // When the device reboots start the noScrollService
-        if ( intent.getAction().toString().equals( "android.intent.action.BOOT_COMPLETED" ) )
-        {
-            // Do something we we decided to implement this feature
-        }
+        // Future work
+//        if ( intent.getAction().toString().equals( "android.intent.action.BOOT_COMPLETED" ) )
+//        {
+//            // Do something we we decided to implement this feature
+//        }
         
-        if ( intent.getAction().toString().equals( StaticConfig.NEXT_HOME ) )
-        {
-            try
-            {
-                try
-                {
-                    // Get the name of the current selected home app
-                    // XXX : how to manage the list correct as we step through each home app installed?
-                    String name = HomeManagerActivity.listAppInfo.get( StaticConfig.position ).getappName();
+//        if ( intent.getAction().toString().equals( "action" ) )
+//        {
+//            
+//        }
 
-                    // Get the package name of the current selected home app
-                    // XXX : how to manage the list correct as we step through each home app installed?
-                    String packagename = HomeManagerActivity.listAppInfo.get( StaticConfig.position ).getpackageName();
-
-                    // Build the intent to launch
-                    Intent AppIntent = new Intent( Intent.ACTION_MAIN );
-                    AppIntent.addCategory( Intent.CATEGORY_HOME );
-                    AppIntent.setPackage( packagename );
-                    AppIntent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
-
-                    // Make sure the selected application is Callable
-                    if( HomeManagerActivity.isCallable( context, AppIntent ) )
-                    {                           
-                        // Start the selected application
-                        context.startActivity( AppIntent );
-                    }
-                    else
-                    {
-                        // Display user feedback if the home app is not callable
-                        Toast.makeText( context.getApplicationContext(), context.getResources().getString(R.string.installed) + name + context.getResources().getString( R.string.not_callable ), Toast.LENGTH_SHORT ).show();
-                    }
-                    
-                    if ( StaticConfig.position == HomeManagerActivity.listAppInfo.size()-1 )
-                    {
-                        StaticConfig.position = 0;
-                    }
-                    else
-                    {
-                        StaticConfig.position++;
-                    }
-                }
-                catch( NullPointerException e )
-                {
-                    Log.e( DEBUG_TAG, "Launch App : NullPointerException" );
-                    e.printStackTrace();
-                }
-                catch( SecurityException e )
-                {
-                    Toast.makeText( context.getApplicationContext(), context.getResources().getString( R.string.securityException ), Toast.LENGTH_SHORT ).show();
-                    Log.e( DEBUG_TAG, "Launch App : SecurityException" );
-                    e.printStackTrace();
-                }
-
-            }
-            catch ( NullPointerException e )
-            {
-                Log.e( DEBUG_TAG, StaticConfig.TWISTED_TAG + "BroadcastReceiver : NullPointerException" );
-                e.printStackTrace();
-            }
-            catch ( RuntimeException e )
-            {
-                Log.e( DEBUG_TAG, StaticConfig.TWISTED_TAG + "BroadcastReceiver : RuntimeException" );
-                e.printStackTrace();
-            }
-        }
-        else if ( intent.getAction().toString().equals( StaticConfig.PREV_HOME ) )
-        {
-            try
-            {
-                // TODO: Widget previous note widget was just a beta test
-
-            }
-            catch ( NullPointerException e )
-            {
-                Log.e( DEBUG_TAG, StaticConfig.TWISTED_TAG + "BroadcastReceiver : NullPointerException" );
-                e.printStackTrace();
-            }
-            catch ( RuntimeException e )
-            {
-                Log.e( DEBUG_TAG, StaticConfig.TWISTED_TAG + "BroadcastReceiver : RuntimeException" );
-                e.printStackTrace();
-            }
-        }
     } // End onReceive
 } // End class MainBroadcastReceiver
 // EOF
