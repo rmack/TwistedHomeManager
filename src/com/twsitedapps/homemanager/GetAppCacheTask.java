@@ -31,12 +31,13 @@ import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 
 /*****************************************************************************
  * GetAppCacheTask - AsyncTask - AsyncTask to get all Home apps. 
  * 
  * @author Russell T Mackler
- * @version 1.0
+ * @version 1.0.1.8
  * @since 1.0
  */
 class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
@@ -46,11 +47,11 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
     // Used to make use of the package manager
     private PackageManager           pm                       = null;
     private Context                  context                  = null;
-    private HomeManagerArrayAdapter  homeManagerArrayAdapter  = null;
+    private ArrayAdapter<AppInfo>    arrayAdapter             = null;
     private boolean                  isFinishedBuildingList   = false;
     
     // The cached list of installed home applications
-    public static ArrayList<AppInfo> listAppInfo;
+    public ArrayList<AppInfo> listAppInfo;
     
     
     /*****************************************************************************
@@ -63,12 +64,12 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
      */
     public GetAppCacheTask( Context context, 
                             ArrayList<AppInfo> listAppInfo,
-                            HomeManagerArrayAdapter homeManagerArrayAdapter,
+                            ArrayAdapter<AppInfo> arrayAdapter,
                             boolean isFinishedBuildingList )
     {
         this.context = context;
         this.listAppInfo = listAppInfo;
-        this.homeManagerArrayAdapter = homeManagerArrayAdapter;
+        this.arrayAdapter = arrayAdapter;        
         this.isFinishedBuildingList = isFinishedBuildingList;
         // Get Android's Package Manager
         pm = context.getPackageManager();
@@ -88,7 +89,7 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
         String defaultPackageName = "none";
         
         // Get the running process memory
-        HashMap<String, Integer> pidMap = HomeManagerActivity.getRunningProcess( this.context );
+        HashMap<String, Integer> pidMap = Util.getRunningProcess( this.context );
 
         try
         {
@@ -136,7 +137,7 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
                     int memory = 0;
                     if ( pidMap.get( defaultPackageName ) != null )
                     {
-                        memory = HomeManagerActivity.getPkgMemory( pidMap.get( defaultPackageName ), this.context );
+                        memory = Util.getPkgMemory( pidMap.get( defaultPackageName ), this.context );
                     }
                     
                     // Permissions to display
@@ -254,7 +255,7 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
                         int memory = 0;
                         if ( pidMap.get( packageName ) != null )
                         {
-                            memory = HomeManagerActivity.getPkgMemory( pidMap.get( packageName ), this.context );
+                            memory = Util.getPkgMemory( pidMap.get( packageName ), this.context );
                         }
                         
                         AppInfo appInfo = new AppInfo( appName,
@@ -320,9 +321,9 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
             // Put the First image within the directory within the cache
             listAppInfo.addAll( map[0].values() );
             
-            if ( homeManagerArrayAdapter != null  )
+            if ( arrayAdapter != null  )
             {
-                homeManagerArrayAdapter.notifyDataSetChanged();
+                arrayAdapter.notifyDataSetChanged();
             }
         }
     } // End onProgressUpdate
@@ -334,12 +335,13 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
      */
     @Override protected void onPostExecute( Integer isOK )
     {
-        // Should we exit this activity due to an exception
+        // Check the status
         if( isOK == 0 )
         {
-            // XXX : todo finish();
+            // TODO : Should we exit this activity due to an exception
         }
 
+        // Set to indicate if user can select "Get Home"
         HomeManagerActivity.isFinishedBuildingList = true;
         this.isFinishedBuildingList = true;
 
@@ -347,22 +349,9 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
         Collections.sort( listAppInfo, AppInfo.NAME_ORDER );
         Collections.sort( listAppInfo, AppInfo.DEFAULT_ORDER );
         
-        // UnComment out to build list of names in the market
-        // Use script to format and put back into java code
-//        for ( int i = 0; i < listAppInfo.size(); i++ )
-//        {
-//            String appPkgNameVN   = listAppInfo.get( i ).getappName().trim().replaceAll( "\\W*", "" );
-//            String appNameVN      = listAppInfo.get( i ).getappName().trim().replaceAll( "\\W*", "" ) + "Name";
-//            String appNameValue   = listAppInfo.get( i ).getappName();
-//            String appPkgValue    = listAppInfo.get( i ).getpackageName().trim();
-//            Log.e( DEBUG_TAG, "public static final String      " + appNameVN + "       = \"" + appNameValue + "\";");
-//            Log.e( DEBUG_TAG, "public static final String      " + appPkgNameVN     + "       = \"market://search?q=" + appPkgValue + "\";");
-//            Log.e( DEBUG_TAG, "tmpHashMap.put( StaticConfig." + appNameVN + ", StaticConfig." + appPkgNameVN + " );" );
-//        }
-        
-        if ( homeManagerArrayAdapter != null  )
+        if ( arrayAdapter != null  )
         {
-            homeManagerArrayAdapter.notifyDataSetChanged();
+            arrayAdapter.notifyDataSetChanged();
         }
     } // End onPostExecute
 } // End GetAppCacheTask

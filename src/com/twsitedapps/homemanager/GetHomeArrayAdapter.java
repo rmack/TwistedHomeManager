@@ -36,12 +36,12 @@ import android.widget.TextView;
  * the Android Play store within a listview. 
  * 
  * @author Russell T Mackler
- * @version 1.0
+ * @version 1.0.1.8
  * @since 1.0
  */
 public class GetHomeArrayAdapter extends ArrayAdapter<AppMarket>
 {
-    private static final String        DEBUG_TAG = "GetHomeArrayAdapter";
+    private static final String        DEBUG_TAG = GetHomeArrayAdapter.class.getSimpleName();
 
     // The activity using this adapter
     private final Activity             context;
@@ -115,7 +115,7 @@ public class GetHomeArrayAdapter extends ArrayAdapter<AppMarket>
      */
     @Override public View getView( int position, View convertView, ViewGroup parent )
     {
-        // ViewHolder will buffer the individual fields of the dirrow layout
+        // ViewHolder will buffer the individual fields of the get home row layout
         ViewHolder holder;
 
         // Recycle existing view if passed as parameter
@@ -274,5 +274,5 @@ public class GetHomeArrayAdapter extends ArrayAdapter<AppMarket>
 
         return rowView;
     } // End getView
-} // End DirArrayAdapter
+} // End GetHomeArrayAdapter
 // EOF

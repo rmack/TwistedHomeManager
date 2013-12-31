@@ -44,12 +44,12 @@ import android.widget.AdapterView.OnItemClickListener;
  * on the Android Play Store. 
  * 
  * @author Russell T Mackler
- * @version 1.0
+ * @version 1.0.1.8
  * @since 1.0
  */
 public class GetHomeActivity extends Activity
 {
-    private final static String  DEBUG_TAG    = "GetHomeActivity";
+    private final static String  DEBUG_TAG    = GetHomeActivity.class.getSimpleName();
 
     private Activity             thisActivity = null;
     private GetHomeArrayAdapter  getHomeArrayAdapter;
@@ -70,7 +70,7 @@ public class GetHomeActivity extends Activity
             thisActivity = this;
     
             // Get the preferences for this app
-            AppPreferences.getPrefs( thisActivity );
+            Preferences.getPrefs( thisActivity );
     
             // Create the container for Market apps
             listAppInfo = new ArrayList<AppMarket>();
@@ -140,8 +140,11 @@ public class GetHomeActivity extends Activity
 
         try
         {
+            // Set the default language if the user changes it
+            AppLocale.getInstance( thisActivity ).setDefaultLocale();
+            
             // Get the preferences for this app
-            AppPreferences.getPrefs( thisActivity );
+            Preferences.getPrefs( thisActivity );
 
             // Compare installed vs known Home Apps on market
             new GetAppCacheTask().execute();

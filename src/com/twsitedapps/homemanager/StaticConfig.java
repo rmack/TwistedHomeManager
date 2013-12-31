@@ -24,7 +24,7 @@ import android.content.SharedPreferences;
  * 
  * @author Russell T Mackler
  * @version 1.0
- * @since 1.0
+ * @since 1.0.1.8
  */
 public class StaticConfig
 {
@@ -33,14 +33,10 @@ public class StaticConfig
     
     public static final String      TWISTED_TAG                 = "+++++ TWISTED +++++ ";
 
-    // Position for widget
-    public static int               position                    = 0;
-
     // Intents
     public static final String      PREFERENCES_INTENT          = "com.twsitedapps.homemanager.action.PREFERENCES";
     public static final String      GETHOME_INTENT              = "com.twsitedapps.homemanager.action.GETHOME";
-    public static final String      NEXT_HOME                   = "com.twsitedapps.homemanager.action.NEXT";
-    public static final String      PREV_HOME                   = "com.twsitedapps.homemanager.action.PREV";
+    public static final String      QUICK_SELET_INTENT          = "com.twsitedapps.homemanager.action.QUICK_SELECT";
 
     // External Location references
     public static final String      THM_URL                     = "http://www.twistedapps.org";
@@ -55,6 +51,7 @@ public class StaticConfig
 
     // Standard Options
     public static final String      THEME                       = "themeKey";
+    public static final String      NOTIFICATION_KEY            = "notificationKey";
     public static int               theme                       = 0;
     public static final int         BLACK                       = 0;
     public static final int         WHITE                       = 1;

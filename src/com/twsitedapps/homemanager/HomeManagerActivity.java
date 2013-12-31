@@ -19,24 +19,17 @@ package com.twsitedapps.homemanager;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.ActivityManager;
-import android.app.ActivityManager.RunningAppProcessInfo;
+import android.app.NotificationManager;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Color;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -55,7 +48,7 @@ import android.widget.Toast;
  * listview. 
  * 
  * @author Russell T Mackler
- * @version 1.0
+ * @version 1.0.1.8
  * @since 1.0
  */
 public class HomeManagerActivity extends Activity
@@ -74,13 +67,6 @@ public class HomeManagerActivity extends Activity
     // Set to true when the Async Task is finished building the installed home app list
     public static boolean            isFinishedBuildingList   = false;
 
-    // Used for creating the intent for InstalledAppDetails
-    private static final String      SCHEME                   = "package";
-    private static final String      APP_PKG_NAME_21          = "com.android.settings.ApplicationPkgName";
-    private static final String      APP_PKG_NAME_22          = "pkg";
-    private static final String      APP_DETAILS_PACKAGE_NAME = "com.android.settings";
-    private static final String      APP_DETAILS_CLASS_NAME   = "com.android.settings.InstalledAppDetails";
-
 
     /*
      * (non-Javadoc)
@@ -96,7 +82,7 @@ public class HomeManagerActivity extends Activity
             thisActivity = this;
     
             // Get the preferences for this app
-            AppPreferences.getPrefs( thisActivity );
+            Preferences.getPrefs( thisActivity );
     
             // Create the cached ArrayList of home applications
             listAppInfo = new ArrayList<AppInfo>();
@@ -128,10 +114,10 @@ public class HomeManagerActivity extends Activity
                     Log.i( DEBUG_TAG, "Package Name = [" + pkgname + "]" );
     
                     // Make the right Intent to start InstalledAppDetails
-                    Intent it = makeIntentInstalledAppDetails( pkgname );
+                    Intent it = Util.makeIntentInstalledAppDetails( pkgname );
     
                     // Make sure the selected application is Callable
-                    if( isCallable( thisActivity, it ) )
+                    if( Util.isCallable( thisActivity, it ) )
                     {
                         // Start the selected application
                         startActivity( it );
@@ -166,7 +152,7 @@ public class HomeManagerActivity extends Activity
                         AppIntent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
     
                         // Make sure the selected application is Callable
-                        if( isCallable( thisActivity, AppIntent ) )
+                        if( Util.isCallable( thisActivity, AppIntent ) )
                         {                           
                             // Start the selected application
                             startActivity( AppIntent );
@@ -209,10 +195,10 @@ public class HomeManagerActivity extends Activity
                         String pkgname = res.activityInfo.packageName;
     
                         // Make the right Intent to start InstalledAppDetails
-                        Intent it = makeIntentInstalledAppDetails( pkgname );
+                        Intent it = Util.makeIntentInstalledAppDetails( pkgname );
     
                         // Make sure the selected application is Callable
-                        if( isCallable( thisActivity, it ) )
+                        if( Util.isCallable( thisActivity, it ) )
                         {
                             // Start the selected application
                             startActivity( it );
@@ -270,7 +256,7 @@ public class HomeManagerActivity extends Activity
                             // Start the Market App Activity
                             Intent getHomeIntent = new Intent( StaticConfig.GETHOME_INTENT );
                             
-                            if( isCallable( thisActivity, getHomeIntent ) )
+                            if( Util.isCallable( thisActivity, getHomeIntent ) )
                             { 
                                 // Start Process Image activity
                                 startActivity( getHomeIntent );
@@ -318,8 +304,38 @@ public class HomeManagerActivity extends Activity
 
         try
         {
+            // Set the default language if the user changes it
+            AppLocale.getInstance( thisActivity ).setDefaultLocale();
+            
+            // Detect that the user has changed the language within preferences
+            if ( AppLocale.getInstance( thisActivity ).languageChanged() )
+            {
+                // Immediately set the indicator that the language change was detected 
+                AppLocale.getInstance( thisActivity ).setLanguageChanged( false );
+                
+                // Restart this activity based on the new locale's language selection
+                Intent intent = getIntent();
+                intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                intent.addFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
+                finish();
+                startActivity( intent );
+            }
+            
             // Get the preferences for this app
-            AppPreferences.getPrefs( thisActivity );
+            Preferences.getPrefs( thisActivity );
+            
+            // Check if the Notification should be shown
+            if ( PreferenceManager.getDefaultSharedPreferences( thisActivity ).getBoolean( StaticConfig.NOTIFICATION_KEY, true ) )
+            {
+                // Enable quick selecting of home apps from the notification bar
+                Util.showNotification( thisActivity );
+            }
+            else
+            {
+                // Cancel the notification
+                NotificationManager notificationManager = (NotificationManager) thisActivity.getSystemService( Context.NOTIFICATION_SERVICE );
+                notificationManager.cancelAll();
+            }
 
             // Set this so we know the installed Home App list has been built
             isFinishedBuildingList = false;
@@ -339,155 +355,6 @@ public class HomeManagerActivity extends Activity
             e.printStackTrace();
         }
     } // End onResume
-
-
-    /*****************************************************************************
-     * isCallable - Check to make sure Activity to start is callable
-     * set by the end user <br>
-     * 
-     * @param a - Activity - The activity calling this method
-     * @param intent - Intent - The intent that starts the application
-     * 
-     * @return boolean - Application can be started (true) or not (false)
-     */
-    public static boolean isCallable( final Context context, final Intent intent )
-    {
-        List<ResolveInfo> list = context.getPackageManager().queryIntentActivities( intent, PackageManager.MATCH_DEFAULT_ONLY );
-        return list.size() > 0;
-    } // End isCallable
-
-
-    /*****************************************************************************
-     * isPackagePreferred - Check to see if the Package is a Preferred Activity
-     * set by the end user <br>
-     * 
-     * @param a - Activity - The activity calling this method
-     * @param packageName - String - Package name of the app
-     * 
-     * @return boolean - Package is set as the default
-     */
-    public static boolean isPackagePreferred( Activity a, String packageName )
-    {
-        boolean isPreferredPackage = false;
-
-        try
-        {
-            final Intent intent = new Intent( Intent.ACTION_MAIN );
-            intent.addCategory( Intent.CATEGORY_HOME );
-            final ResolveInfo res = a.getPackageManager().resolveActivity( intent, PackageManager.MATCH_DEFAULT_ONLY );
-            String pkgName = res.activityInfo.packageName;
-            if( res.activityInfo == null )
-            {
-                // should not happen. A home is always installed, isn't it?
-            }
-            else if( pkgName.equals( "android" ) )
-            {
-                // No default selected
-            }
-            else
-            {
-                // res.activityInfo.packageName and res.activityInfo.name gives you
-                // the default app
-                if( packageName.equals( pkgName ) )
-                {
-                    isPreferredPackage = true;
-                }
-            }
-        }
-        catch( IllegalStateException e )
-        {
-            Log.e( DEBUG_TAG, StaticConfig.TWISTED_TAG + "isPackagePreferred : IllegalStateException" );
-            e.printStackTrace();
-        }
-        catch( Exception e )
-        {
-            Log.e( DEBUG_TAG, StaticConfig.TWISTED_TAG + "isPackagePreferred : Exception" );
-            e.printStackTrace();
-        }
-
-        return isPreferredPackage;
-    } // End isPackagePreferred
-
-    
-    /*****************************************************************************
-     * getRunningProcess - Get a list of running processes 
-     * 
-     * @return HashMap<String, Integer> - Package-Name, PID (Process ID)
-     */
-    public static HashMap<String, Integer> getRunningProcess( Context context )
-    {
-        ActivityManager activityManager = (ActivityManager) context.getSystemService( ACTIVITY_SERVICE );
-        android.app.ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
-        activityManager.getMemoryInfo( memoryInfo );
-
-        List<RunningAppProcessInfo> runningAppProcesses = activityManager.getRunningAppProcesses();
-        
-        HashMap<String, Integer> pidMap = new HashMap<String, Integer>();
-        for ( RunningAppProcessInfo runningAppProcessInfo : runningAppProcesses )
-        {
-            pidMap.put( runningAppProcessInfo.processName, runningAppProcessInfo.pid );
-            
-            for( String pkg : runningAppProcessInfo.pkgList )
-            {
-                pidMap.put( pkg, runningAppProcessInfo.pid );
-            }
-        }
-
-        return pidMap;
-    } // End getRunningProcess
-    
-    
-    /*****************************************************************************
-     * getPkgMemory - Get the package's memory given it's PID 
-     * 
-     * @return HashMap<String, Integer> - Package-Name, PID (Process ID)
-     */
-    @TargetApi ( 5 ) public static int getPkgMemory( final int pid, final Context context )
-    {
-        int total = 0;
-        
-        ActivityManager activityManager = (ActivityManager) context.getSystemService( ACTIVITY_SERVICE );
-        android.app.ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
-        activityManager.getMemoryInfo( memoryInfo );
-        
-        int pids[] = new int[1];
-        pids[0] = pid;
-        android.os.Debug.MemoryInfo[] memoryInfoArray = activityManager.getProcessMemoryInfo( pids );
-        total = ( memoryInfoArray[0].getTotalSharedDirty() + 
-                  memoryInfoArray[0].getTotalPss() +
-                  memoryInfoArray[0].getTotalPrivateDirty()) / 1024;
-        
-        return total;
-    } // End getPkgMemory
-    
-
-    /*****************************************************************************
-     * makeIntentInstalledAppDetails - Get app's Android settings 
-     * 
-     * @return packageName - String - Package name of the app
-     */
-    public Intent makeIntentInstalledAppDetails( String packageName )
-    {
-        Intent intent = new Intent();
-
-        // Build intent for API version greater than 9
-        if( Build.VERSION.SDK_INT >= 9 )
-        {
-            intent.setAction( Settings.ACTION_APPLICATION_DETAILS_SETTINGS );
-            Uri uri = Uri.fromParts( SCHEME, packageName, null );
-            intent.setData( uri );
-        }
-        else
-        // Build intent for API version 8 and below
-        {
-            final String appPkgName = ( Build.VERSION.SDK_INT == 8 ? APP_PKG_NAME_22 : APP_PKG_NAME_21 );
-            intent.setAction( Intent.ACTION_VIEW );
-            intent.setClassName( APP_DETAILS_PACKAGE_NAME, APP_DETAILS_CLASS_NAME );
-            intent.putExtra( appPkgName, packageName );
-        }
-
-        return intent;
-    } // End makeIntentInstalledAppDetails
 
 
     /*
@@ -517,13 +384,6 @@ public class HomeManagerActivity extends Activity
         {
             // Sort Application by App Name
             Collections.sort( listAppInfo, AppInfo.NAME_ORDER );
-            
-            // Information on all apps installed (Debug)
-            Log.e( DEBUG_TAG, "listAppInfo.size() [" + listAppInfo.size() + "]" );
-//            for ( int app = 0; app < listAppInfo.size(); app++ )
-//            {
-//                Log.d( DEBUG_TAG, "App [" + listAppInfo.get( app ).getappName() + "] : Package Name: = [market://search?q=" + listAppInfo.get( app ).getpackageName() + "] " + app );
-//            }
 
             // Refresh the ListView
             homeManagerArrayAdapter.notifyDataSetChanged();
@@ -579,6 +439,6 @@ public class HomeManagerActivity extends Activity
 
         return return_value;
     } // End onOptionsItemSelected
-
+    
 } // End HomeManagerActivity
 // EOF

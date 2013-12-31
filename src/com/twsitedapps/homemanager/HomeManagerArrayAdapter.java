@@ -35,22 +35,24 @@ import android.widget.TextView;
  * currently installed within a listview. 
  * 
  * @author Russell T Mackler
- * @version 1.0
+ * @version 1.0.1.8
  * @since 1.0
  */
 public class HomeManagerArrayAdapter extends ArrayAdapter<AppInfo>
 {
-    private static final String            DEBUG_TAG = "HomeManagerArrayAdapter";
+    private static final String            DEBUG_TAG = HomeManagerArrayAdapter.class.getSimpleName();;
 
     // The activity using this adapter
     private final Activity                 context;
 
-    // The ArrayList of directories bring used
+    // The ArrayList of home apps
     private final ArrayList<AppInfo>       listAppInfo;
 
-    // ////////////////////////////////////////////////////////////////////////////
-    // Constructor
-    // ////////////////////////////////////////////////////////////////////////////
+    /*****************************************************************************
+     * GetHomeArrayAdapter - ArrayAdapter<AppInfo> - Adapter to show home apps 
+     * currently installed within a listview. 
+     * 
+     */
     public HomeManagerArrayAdapter( Activity context, ArrayList<AppInfo> listAppInfo )
     {
         super( context, R.layout.homemanagerrow, listAppInfo );
@@ -122,7 +124,7 @@ public class HomeManagerArrayAdapter extends ArrayAdapter<AppInfo>
      */
     @Override public View getView( int position, View convertView, ViewGroup parent )
     {
-        // ViewHolder will buffer the individual fields of the dirrow layout
+        // ViewHolder will buffer the individual fields of the home manager row layout
         ViewHolder holder;
 
         // Recycle existing view if passed as parameter
@@ -399,5 +401,5 @@ public class HomeManagerArrayAdapter extends ArrayAdapter<AppInfo>
 
         return rowView;
     } // End getView
-} // End DirArrayAdapter
+} // End HomeManagerArrayAdapter
 // EOF

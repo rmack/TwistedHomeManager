@@ -27,12 +27,12 @@ import android.util.Log;
  * App Market - Container - Apps within the market.
  * 
  * @author Russell T Mackler
- * @version 1.0
+ * @version 1.0.1.8
  * @since 1.0
  */
 public class AppMarket implements Comparable<AppMarket>
 {
-    private static final String DEBUG_TAG                = "AppMarket";
+    private static final String DEBUG_TAG                = AppMarket.class.getSimpleName();
 
     // Application metadata
     private String              appName                  = null;

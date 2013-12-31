@@ -31,12 +31,12 @@ import android.util.Log;
  * AppInfo - Container - Typical information stored for an installed Home app.
  * 
  * @author Russell T Mackler
- * @version 1.0
+ * @version 1.0.1.8
  * @since 1.0
  */
 public class AppInfo implements Comparable<AppInfo>
 {
-    private static final String DEBUG_TAG                = "AppInfo";
+    private static final String DEBUG_TAG                = AppInfo.class.getSimpleName();
 
     // Application metadata
     private String              appName                  = null;  // Home App Name
