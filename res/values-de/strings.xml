@@ -27,6 +27,14 @@
     <string name="version">Version:</string>
     <string name="permission">Erlaubnis:</string>
     
+    <!-- Buttons -->
+    <string name="clearNotification">klare Benachrichtigung</string>
+    <string name="disableNotification">Deaktivieren Benachrichtigung</string>
+    
+    <!-- Notification -->
+    <string name="quickSelect">Quick Select</string>
+    <string name="selectHomeApp">Wählen Sie ein Haus App</string>
+    
     <!-- Array -->
     <string name="Black">Schwarz</string>
     <string name="White">Weiß</string>
@@ -49,6 +57,8 @@
     <string name="StandardOptionsText">Auswählen um Standard Optionen zu ändern</string>
     <string name="AppTheme">App Theme</string>
     <string name="AppThemeText">Setzt das Thema zu einer neuen Farbe</string>
+    <string name="Notification">Notifizierung zu ermöglichen</string>
+    <string name="NotificationText">Aktivieren Sie die Schnellauswahl</string>
     <!-- About -->
     <string name="About">About</string>
     <string name="CopyrightText">Urheberrecht © 2010 Twisted Apps LLC</string>

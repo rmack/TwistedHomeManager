@@ -18,4 +18,22 @@
 	   <item>4</item>
 	   <item>5</item>
 	</string-array>
+	
+	<string-array name="listLanguageArray">
+	   <item>@string/DefaultValue</item>
+	   <item>@string/english</item>
+	   <item>@string/german</item>
+	   <item>@string/french</item>
+	   <item>@string/hungarian</item>
+	   <item>@string/japanese</item>
+	</string-array>
+
+	<string-array name="listLanguageValues">
+	   <item>none</item> <!-- Default invalid value use devices locale -->
+	   <item>en-us</item>
+	   <item>de</item>
+	   <item>fr</item>
+	   <item>hu</item>
+	   <item>ja</item>
+	</string-array>
 </resources>

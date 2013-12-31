@@ -27,6 +27,14 @@
     <string name="version">változat:</string>
     <string name="permission">beleegyezés:</string>
     
+    <!-- Buttons -->
+    <string name="clearNotification">Tiszta Értesítési</string>
+    <string name="disableNotification">Értesítések letiltása</string>
+    
+    <!-- Notification -->
+    <string name="quickSelect">Gyors kijelölés</string>
+    <string name="selectHomeApp">Válassza otthoni app</string>
+    
     <!-- Array -->
     <string name="Black">Fekete</string>
     <string name="White">Fehér</string>
@@ -50,6 +58,8 @@
     <string name="StandardOptionsText">Válassza a normál beállítások módosításait</string>
     <string name="AppTheme">App Téma</string>
     <string name="AppThemeText">Beállíthat egy új színű témát</string>
+    <string name="Notification">Értesítés engedélyezése</string>
+    <string name="NotificationText">Engedélyezze a Gyors kijelölés értesítést</string>
     <!-- About -->
     <string name="About">Rólunk</string>
     <string name="CopyrightText">Copyright © 2010 Twisted Apps™ LLC</string>

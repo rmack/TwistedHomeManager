@@ -21,10 +21,17 @@
     <string name="app_name">Twisted Home Manager</string>
     
     <!-- Version number -->
-    <string name="version_num">1.0.1.7</string>
+    <string name="version_num">1.0.1.8</string>
 
     <!-- ++++++++++++++++++++++++++++ Multi-language support +++++++++++++++ -->
     <!-- English Translation -->
+    
+    <!-- Languages -->
+    <string name="english">English</string>
+    <string name="german">German</string>
+    <string name="french">French</string>
+    <string name="hungarian">Hungarian</string>
+    <string name="japanese">Japanese</string>
     
     <string name="set_preferences">Preferences</string>
     <string name="not_callable"> is not callable</string>
@@ -50,8 +57,15 @@
     <string name="version">Version:</string>
     <string name="permission">Permission:</string>
     
+    <!-- Buttons -->
+    <string name="clearNotification">Clear Notification</string>
+    <string name="disableNotification">Disable Notification</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    
+    <!-- Notification -->
+    <string name="quickSelect">Quick Select</string>
+    <string name="selectHomeApp">Select a home app</string>
     
     <!-- Array -->
     <string name="Black">Black</string>
@@ -76,6 +90,8 @@
     <string name="StandardOptionsText">Select to change standard options</string>
     <string name="AppTheme">App Theme</string>
     <string name="AppThemeText">Sets the Theme to a new color</string>
+    <string name="Notification">Enable Notification</string>
+    <string name="NotificationText">Enable the quick select notification</string>
     <!-- About -->
     <string name="About">About</string>
     <string name="CopyrightText">Copyright © 2010 Twisted Apps™ LLC</string>

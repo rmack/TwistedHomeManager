@@ -27,6 +27,14 @@
     <string name="version">バージョン:</string>
     <string name="permission">パーミッション:</string>
     
+    <!-- Buttons -->
+    <string name="clearNotification">クリア通知</string>
+    <string name="disableNotification">通知を無</string>
+    
+    <!-- Notification -->
+    <string name="quickSelect">クイック選択</string>
+    <string name="selectHomeApp">ホームアプリを選択</string>
+    
     <!-- Array -->
     <string name="Black">ブラック</string>
     <string name="White">白</string>
@@ -50,6 +58,8 @@
     <string name="StandardOptionsText">標準オプションを変更する場合に選択</string>
     <string name="AppTheme">アプリのテーマ</string>
     <string name="AppThemeText">新しい色にテーマを設定し</string>
+    <string name="Notification">通知を有効に</string>
+    <string name="NotificationText">クイック選択通知を有効に</string>
     <!-- About -->
     <string name="About">約</string>
     <string name="CopyrightText">Copyright © 2010 Twisted Apps™ LLC</string>
