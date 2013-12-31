@@ -29,6 +29,17 @@
 	                        android:defaultValue="0"
 	                        android:entries="@array/listTheme"
 	                        android:entryValues="@array/listThemeValues" />
+	                <CheckBoxPreference
+	                        android:title="@string/Notification"
+	                        android:summary="@string/NotificationText"
+	                        android:defaultValue="true"
+	                        android:key="notificationKey" />
+	                <ListPreference
+	                        android:title="Language"
+	                        android:key="listLanguage"
+	                        android:defaultValue="0"
+	                        android:entries="@array/listLanguageArray"
+	                        android:entryValues="@array/listLanguageValues" />
                 </PreferenceScreen>
         </PreferenceCategory>
 		<PreferenceCategory
