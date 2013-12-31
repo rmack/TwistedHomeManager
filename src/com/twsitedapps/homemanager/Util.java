@@ -53,6 +53,8 @@ public class Util
     private static final String      APP_DETAILS_PACKAGE_NAME = "com.android.settings";
     private static final String      APP_DETAILS_CLASS_NAME   = "com.android.settings.InstalledAppDetails";
 
+    // No way to instantiate
+    private Util(){};
 
     /*****************************************************************************
      * isCallable - Check to make sure Activity to start is callable
