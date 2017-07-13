@@ -80,6 +80,8 @@ public class StaticConfig
     public static final String      BalancerLauncherName        = "Balancer Launcher";
     public static final String      BuzzLauncher                = "market://search?q=com.buzzpia.aqua.launcher";
     public static final String      BuzzLauncherName            = "Buzz Launcher";
+    public static final String      CarHomeUltra                = "market://search?q=spinninghead.carhome";
+    public static final String      CarHomeUltraName            = "Car Home Ultra";
     public static final String      ClaystoneLauncher           = "market://search?q=com.claystoneinc";
     public static final String      ClaystoneLauncherName       = "Claystone Launcher";
     public static final String      CrazyHomeLite               = "market://search?q=com.cdproductions.apps.crazyhomelite";

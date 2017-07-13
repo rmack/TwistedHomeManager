@@ -346,6 +346,7 @@ public class GetHomeActivity extends Activity
             tmpHashMap.put( StaticConfig.AtomLauncherName, StaticConfig.AtomLauncher );
             tmpHashMap.put( StaticConfig.BalancerLauncherName, StaticConfig.BalancerLauncher );
             tmpHashMap.put( StaticConfig.BuzzLauncherName, StaticConfig.BuzzLauncher );
+            tmpHashMap.put( StaticConfig.CarHomeUltraName, StaticConfig.CarHomeUltra );
             tmpHashMap.put( StaticConfig.ClaystoneLauncherName, StaticConfig.ClaystoneLauncher );
             tmpHashMap.put( StaticConfig.CrazyHomeLiteName, StaticConfig.CrazyHomeLite );
             tmpHashMap.put( StaticConfig.dxTopLiteName, StaticConfig.dxTopLite );
