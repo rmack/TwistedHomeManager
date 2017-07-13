@@ -44,8 +44,8 @@ import android.widget.AdapterView.OnItemClickListener;
  * on the Android Play Store. 
  * 
  * @author Russell T Mackler
- * @version 1.0.1.8
- * @since 1.0
+ * @version 1.0.1.9
+ * @since 1.1
  */
 public class GetHomeActivity extends Activity
 {
@@ -337,57 +337,42 @@ public class GetHomeActivity extends Activity
         {
             // Create the array of Apps in the market (App Name <key>; App Pkg name <value>)
             HashMap<String, String> tmpHashMap = new HashMap<String, String>();
-            tmpHashMap.put( StaticConfig.a360LauncherName, StaticConfig.a360Launcher );
-            tmpHashMap.put( StaticConfig.a91PandaHomeName, StaticConfig.a91PandaHome );
+
             tmpHashMap.put( StaticConfig.AbodeName, StaticConfig.Abode );
             tmpHashMap.put( StaticConfig.ADWLauncherName, StaticConfig.ADWLauncher );
+            tmpHashMap.put( StaticConfig.ADWLauncher2Name, StaticConfig.ADWLauncher2 );
+            tmpHashMap.put( StaticConfig.ADWLauncher1EXName, StaticConfig.ADWLauncher1EX );
             tmpHashMap.put( StaticConfig.ApexLauncherName, StaticConfig.ApexLauncher );
             tmpHashMap.put( StaticConfig.aShellName, StaticConfig.aShell );
             tmpHashMap.put( StaticConfig.AtomLauncherName, StaticConfig.AtomLauncher );
-            tmpHashMap.put( StaticConfig.BalancerLauncherName, StaticConfig.BalancerLauncher );
+            tmpHashMap.put( StaticConfig.ArrowLauncherName, StaticConfig.ArrowLauncher );
             tmpHashMap.put( StaticConfig.BuzzLauncherName, StaticConfig.BuzzLauncher );
             tmpHashMap.put( StaticConfig.CarHomeUltraName, StaticConfig.CarHomeUltra );
-            tmpHashMap.put( StaticConfig.ClaystoneLauncherName, StaticConfig.ClaystoneLauncher );
             tmpHashMap.put( StaticConfig.CrazyHomeLiteName, StaticConfig.CrazyHomeLite );
-            tmpHashMap.put( StaticConfig.dxTopLiteName, StaticConfig.dxTopLite );
-            tmpHashMap.put( StaticConfig.EspierLauncherName, StaticConfig.EspierLauncher );
+            tmpHashMap.put( StaticConfig.EvieLauncherName, StaticConfig.EvieLauncher );
             tmpHashMap.put( StaticConfig.EverythingHomeName, StaticConfig.EverythingHome );
             tmpHashMap.put( StaticConfig.EZLauncherName, StaticConfig.EZLauncher );
             tmpHashMap.put( StaticConfig.FastHomeName, StaticConfig.FastHome );
             tmpHashMap.put( StaticConfig.FinalLauncherName, StaticConfig.FinalLauncher );
             tmpHashMap.put( StaticConfig.GOLauncherEXName, StaticConfig.GOLauncherEX );
-            tmpHashMap.put( StaticConfig.HiLauncherName, StaticConfig.HiLauncher );
+            tmpHashMap.put( StaticConfig.GoogleNowLauncherName, StaticConfig.GoogleNowLauncher );
+            tmpHashMap.put( StaticConfig.HoloLauncherName, StaticConfig.HoloLauncher );
             tmpHashMap.put( StaticConfig.HoloLauncherHDName, StaticConfig.HoloLauncherHD );
-            tmpHashMap.put( StaticConfig.HomeName, StaticConfig.Home );
             tmpHashMap.put( StaticConfig.homescreen3DfreeversionName, StaticConfig.homescreen3Dfreeversion );
-            tmpHashMap.put( StaticConfig.iHomeName, StaticConfig.iHome );
             tmpHashMap.put( StaticConfig.KitKatLauncherName, StaticConfig.KitKatLauncher );
-            tmpHashMap.put( StaticConfig.Launcher360Name, StaticConfig.Launcher360 );
-            tmpHashMap.put( StaticConfig.Launcher7Name, StaticConfig.Launcher7 );
             tmpHashMap.put( StaticConfig.Launcher8freeName, StaticConfig.Launcher8free );
-            tmpHashMap.put( StaticConfig.launcher91Name, StaticConfig.launcher91 );
-            tmpHashMap.put( StaticConfig.LauncherName, StaticConfig.Launcher );
             tmpHashMap.put( StaticConfig.LauncherProName, StaticConfig.LauncherPro );
             tmpHashMap.put( StaticConfig.LightningLauncherName, StaticConfig.LightningLauncher );
-            tmpHashMap.put( StaticConfig.LiveHomeName, StaticConfig.LiveHome );
             tmpHashMap.put( StaticConfig.MetroUIName, StaticConfig.MetroUI );
-            tmpHashMap.put( StaticConfig.MiHomeName, StaticConfig.MiHome );
             tmpHashMap.put( StaticConfig.MiniLauncherName, StaticConfig.MiniLauncher );
-            tmpHashMap.put( StaticConfig.mooLauncherName, StaticConfig.mooLauncher );
             tmpHashMap.put( StaticConfig.MXHomeLauncherName, StaticConfig.MXHomeLauncher );
             tmpHashMap.put( StaticConfig.MyHomeliteName, StaticConfig.MyHomelite );
-            tmpHashMap.put( StaticConfig.MyLauncherName, StaticConfig.MyLauncher );
-            tmpHashMap.put( StaticConfig.NemusLauncherName, StaticConfig.NemusLauncher );
+            tmpHashMap.put( StaticConfig.NextLauncherLiteName, StaticConfig.NextLauncherLite );
             tmpHashMap.put( StaticConfig.NovaLauncherName, StaticConfig.NovaLauncher );
             tmpHashMap.put( StaticConfig.QQlauncherName, StaticConfig.QQlauncher );
-            tmpHashMap.put( StaticConfig.QuickLaunchHomeName, StaticConfig.QuickLaunchHome );
-            tmpHashMap.put( StaticConfig.ReginaLauncherName, StaticConfig.ReginaLauncher );
-            tmpHashMap.put( StaticConfig.SimpleHomeLiteName, StaticConfig.SimpleHomeLite );
-            tmpHashMap.put( StaticConfig.SimpleHomeName, StaticConfig.SimpleHome );
             tmpHashMap.put( StaticConfig.SmartLauncherName, StaticConfig.SmartLauncher );
-            tmpHashMap.put( StaticConfig.TagHomeName, StaticConfig.TagHome );
             tmpHashMap.put( StaticConfig.TrebuchetName, StaticConfig.Trebuchet );
-            tmpHashMap.put( StaticConfig.ZeamLauncherName, StaticConfig.ZeamLauncher );
+            tmpHashMap.put( StaticConfig.ZenUILauncherName, StaticConfig.ZenUILauncher );
             
             for( String key : tmpHashMap.keySet()  )
             {
