@@ -62,7 +62,7 @@ public class Util
      * isCallable - Check to make sure Activity to start is callable
      * set by the end user <br>
      * 
-     * @param a - Activity - The activity calling this method
+     * @param context - Activity - The activity calling this method
      * @param intent - Intent - The intent that starts the application
      * 
      * @return boolean - Application can be started (true) or not (false)
@@ -77,7 +77,7 @@ public class Util
     /*****************************************************************************
      * getRunningProcess - Get a list of running processes
      * 
-     * @param - context - Context
+     * @param context - Context
      * 
      * @return HashMap<String, Integer> - Package-Name, PID (Process ID)
      */
