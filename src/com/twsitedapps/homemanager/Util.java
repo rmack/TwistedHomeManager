@@ -23,6 +23,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ActivityManager.RunningAppProcessInfo;
@@ -45,6 +46,7 @@ import android.util.Log;
 public class Util
 {
     private final static String DEBUG_TAG = HomeManagerActivity.class.getSimpleName();
+    private final static String NOTIFICATION_CHANNEL_ID = "quick_select";
     
     // Used for creating the intent for InstalledAppDetails
     private static final String      SCHEME                   = "package";
@@ -70,6 +72,18 @@ public class Util
         List<ResolveInfo> list = context.getPackageManager().queryIntentActivities( intent, PackageManager.MATCH_DEFAULT_ONLY );
         return list.size() > 0;
     } // End isCallable
+
+
+    /*****************************************************************************
+     * canReadOtherAppMemory - Check if Android still exposes useful memory data
+     * for other apps.
+     * 
+     * @return boolean - Other app memory can be shown (true) or not (false)
+     */
+    public static boolean canReadOtherAppMemory()
+    {
+        return ( Build.VERSION.SDK_INT < Build.VERSION_CODES.Q );
+    } // End canReadOtherAppMemory
 
     
     /*****************************************************************************
@@ -224,41 +238,41 @@ public class Util
         // Setup the notification
         NotificationManager notificationManager = (NotificationManager) activity.getSystemService( Context.NOTIFICATION_SERVICE );
         
-        // Setup the SMS Notification
-        Notification quickSelectNotification;
-        
         // Call intent
 //        PendingIntent pIntent = PendingIntent.getActivity( thisActivity, 0, thisActivity.getIntent(), 0 );
         Intent getQuickSelectIntent = new Intent( StaticConfig.QUICK_SELET_INTENT );
-        PendingIntent pQuickSelect = PendingIntent.getActivity( activity, 0, getQuickSelectIntent, 0 );
-        
-//        // Notification builder is on available in API 11 and above
-//        if ( Build.VERSION.SDK_INT >=  Build.VERSION_CODES.HONEYCOMB )
-//        {
-//            // Build the notification for API level 11 and above
-//            quickSelectNotification = new Notification.Builder( thisActivity )
-//            .setContentTitle( activity.getResources().getString( R.string.quickSelect ) )
-//            .setContentText( activity.getResources().getString( R.string.selectHomeApp ) )
-//            .setSmallIcon( R.drawable.icon )
-//            .setContentIntent( pQuickSelect )
-//            .setAutoCancel( false )
-//            .addAction( R.drawable.icon, "Select", pQuickSelect ).build();
-//            
-//            notificationManager.notify( 1, quickSelectNotification );
-//        }
-//        else
-//        {
-            // Anything below API 11 will need to use the deprecated method
-            
-            // Create a SMS notification that a known user has texted
-            quickSelectNotification = new Notification( R.drawable.icon, "THM", System.currentTimeMillis() );
-            quickSelectNotification.flags = Notification.FLAG_NO_CLEAR;
-            quickSelectNotification.setLatestEventInfo( activity,
-                                                        activity.getResources().getString( R.string.quickSelect ),
-                                                        activity.getResources().getString( R.string.selectHomeApp ),
-                                                        pQuickSelect );
+        int pendingIntentFlags = 0;
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.M )
+        {
+            pendingIntentFlags = PendingIntent.FLAG_IMMUTABLE;
+        }
+        PendingIntent pQuickSelect = PendingIntent.getActivity( activity, 0, getQuickSelectIntent, pendingIntentFlags );
 
-            notificationManager.notify( 1, quickSelectNotification );
-//        }
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.O )
+        {
+            NotificationChannel channel = new NotificationChannel( NOTIFICATION_CHANNEL_ID,
+                                                                   activity.getResources().getString( R.string.quickSelect ),
+                                                                   NotificationManager.IMPORTANCE_DEFAULT );
+            notificationManager.createNotificationChannel( channel );
+        }
+
+        Notification.Builder builder;
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.O )
+        {
+            builder = new Notification.Builder( activity, NOTIFICATION_CHANNEL_ID );
+        }
+        else
+        {
+            builder = new Notification.Builder( activity );
+        }
+
+        Notification quickSelectNotification = builder.setContentTitle( activity.getResources().getString( R.string.quickSelect ) )
+                                                      .setContentText( activity.getResources().getString( R.string.selectHomeApp ) )
+                                                      .setSmallIcon( R.drawable.icon )
+                                                      .setContentIntent( pQuickSelect )
+                                                      .setOngoing( true )
+                                                      .build();
+
+        notificationManager.notify( 1, quickSelectNotification );
     }
 }

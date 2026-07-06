@@ -1,0 +1,42 @@
+subprojects {
+    configurations.all {
+        resolutionStrategy.eachDependency { details ->
+            if (details.requested.group == "org.jetbrains.kotlin") {
+                details.useVersion "1.8.22"
+            }
+            if (details.requested.group == "org.jetbrains.kotlinx" &&
+                    details.requested.name.startsWith("kotlinx-coroutines")) {
+                details.useVersion "1.7.3"
+            }
+        }
+    }
+}
+
+buildscript {
+    // Android - 15 - if adding in any Koltin
+    ext.kotlin_version = '1.8.22'
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.13.2'
+        // Android - 15 - if adding in any Koltin
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+
+        // Fallback to Google Maven directly - Android 15
+        maven { url "https://maven.google.com" }
+
+        // Required for PhoneLocal - implementation ("com.github.joielechong:countrycodepicker:2.4.1")
+        maven { url "https://jitpack.io" }
+
+    }
+}

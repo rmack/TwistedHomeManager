@@ -88,8 +88,12 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
         // Default app if one exists
         String defaultPackageName = "none";
         
-        // Get the running process memory
-        HashMap<String, Integer> pidMap = Util.getRunningProcess( this.context );
+        // Get the running process memory if Android still exposes useful values.
+        HashMap<String, Integer> pidMap = new HashMap<String, Integer>();
+        if( Util.canReadOtherAppMemory() )
+        {
+            pidMap = Util.getRunningProcess( this.context );
+        }
 
         try
         {
@@ -134,10 +138,10 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
                     boolean isDefaultApp  = true;
                     
                     // Get this packages memory if it is running
-                    int memory = 0;
-                    if ( pidMap.get( defaultPackageName ) != null )
+                    String memory = "";
+                    if ( Util.canReadOtherAppMemory() && pidMap.get( defaultPackageName ) != null )
                     {
-                        memory = Util.getPkgMemory( pidMap.get( defaultPackageName ), this.context );
+                        memory = String.valueOf( Util.getPkgMemory( pidMap.get( defaultPackageName ), this.context ) ) + "M";
                     }
                     
                     // Permissions to display
@@ -175,7 +179,7 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
                     AppInfo appInfo = new AppInfo( appName,
                                                    versionName,
                                                    defaultPackageName,
-                                                   String.valueOf( memory ) + "M",
+                                                   memory,
                                                    iconDrawable,
                                                    isDefaultApp,
                                                    startAtBoot,
@@ -252,16 +256,16 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
                         }
                         
                         // Get this packages memory if it is running
-                        int memory = 0;
-                        if ( pidMap.get( packageName ) != null )
+                        String memory = "";
+                        if ( Util.canReadOtherAppMemory() && pidMap.get( packageName ) != null )
                         {
-                            memory = Util.getPkgMemory( pidMap.get( packageName ), this.context );
+                            memory = String.valueOf( Util.getPkgMemory( pidMap.get( packageName ), this.context ) ) + "M";
                         }
                         
                         AppInfo appInfo = new AppInfo( appName,
                                                        versionName,
                                                        packageName,
-                                                       String.valueOf( memory ) + "M",
+                                                       memory,
                                                        iconDrawable,
                                                        isDefaultApp,
                                                        startAtBoot,

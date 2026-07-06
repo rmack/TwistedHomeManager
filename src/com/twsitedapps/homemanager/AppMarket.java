@@ -112,7 +112,7 @@ public class AppMarket implements Comparable<AppMarket>
         
         try
         {
-            dataCmp = new Boolean( this.isInstalled()).compareTo( new Boolean( tmpAppInfo.isInstalled()));
+            dataCmp = Boolean.compare( this.isInstalled(), tmpAppInfo.isInstalled() );
         }
         catch ( NullPointerException e )
         {
@@ -141,7 +141,7 @@ public class AppMarket implements Comparable<AppMarket>
               
               try
               {
-                  dataCmp = new Boolean( e2.isInstalled()).compareTo( new Boolean( e1.isInstalled()));
+                  dataCmp = Boolean.compare( e2.isInstalled(), e1.isInstalled() );
               }
               catch ( NullPointerException e )
               {
@@ -165,7 +165,7 @@ public class AppMarket implements Comparable<AppMarket>
               
               try
               {
-                  dataCmp = new Boolean( e1.isInstalled()).compareTo( new Boolean( e2.isInstalled()));
+                  dataCmp = Boolean.compare( e1.isInstalled(), e2.isInstalled() );
               }
               catch ( NullPointerException e )
               {

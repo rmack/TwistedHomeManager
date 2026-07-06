@@ -254,18 +254,8 @@ public class HomeManagerActivity extends Activity
                         try
                         {
                             // Start the Market App Activity
-                            Intent getHomeIntent = new Intent( StaticConfig.GETHOME_INTENT );
-                            
-                            if( Util.isCallable( thisActivity, getHomeIntent ) )
-                            { 
-                                // Start Process Image activity
-                                startActivity( getHomeIntent );
-                            }
-                            else
-                            {
-                                // Display user feedback if the home app is not callable
-                                Toast.makeText( getApplicationContext(), getResources().getString( R.string.homeAppNotCallable ), Toast.LENGTH_SHORT ).show();
-                            }
+                            Intent getHomeIntent = new Intent( thisActivity, GetHomeActivity.class );
+                            startActivity( getHomeIntent );
                         }
                         catch ( ActivityNotFoundException e )
                         {
