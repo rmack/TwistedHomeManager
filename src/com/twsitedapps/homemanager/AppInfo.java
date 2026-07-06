@@ -128,7 +128,7 @@ public class AppInfo implements Comparable<AppInfo>
         
         try
         {
-            dataCmp = new Boolean( this.getIsDefault()).compareTo( new Boolean( tmpAppInfo.getIsDefault()));
+            dataCmp = Boolean.compare( this.getIsDefault(), tmpAppInfo.getIsDefault() );
         }
         catch ( NullPointerException e )
         {
@@ -151,7 +151,7 @@ public class AppInfo implements Comparable<AppInfo>
               
               try
               {
-                  dataCmp = new Boolean( e2.getIsDefault()).compareTo( new Boolean( e1.getIsDefault()));
+                  dataCmp = Boolean.compare( e2.getIsDefault(), e1.getIsDefault() );
               }
               catch ( NullPointerException e )
               {
