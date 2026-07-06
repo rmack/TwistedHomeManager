@@ -35,7 +35,6 @@ public class StaticConfig
 
     // Intents
     public static final String      GETHOME_INTENT              = "com.twsitedapps.homemanager.action.GETHOME";
-    public static final String      QUICK_SELET_INTENT          = "com.twsitedapps.homemanager.action.QUICK_SELECT";
 
     // External Location references
     public static final String      THM_URL                     = "http://www.twistedapps.org";

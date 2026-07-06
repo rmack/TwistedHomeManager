@@ -59,7 +59,7 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
      * 
      * @param context - Context - The Activity's context
      * @param listAppInfo - ArrayList<AppInfo> To fill out
-     * @param homeManagerArrayAdapter - The Array Adapter for the Home manager list
+     * @param arrayAdapter - The Array Adapter for the Home manager list
      * @param isFinishedBuildingList - boolean if list is finished being built
      */
     public GetAppCacheTask( Context context, 
@@ -237,7 +237,7 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
                         }
                         
                         // Check if the app has network permissions
-                        if ( pm.checkPermission( Manifest.permission.INTERNET, packageName ) == 0 )
+	                        if ( pm.checkPermission( Manifest.permission.INTERNET, packageName ) == PackageManager.PERMISSION_GRANTED )
                         {
                             WiFi = true;
                         }

@@ -328,8 +328,11 @@ public class HomeManagerActivity extends Activity
             // Check if the Notification should be shown
             if ( PreferenceManager.getDefaultSharedPreferences( thisActivity ).getBoolean( StaticConfig.NOTIFICATION_KEY, true ) )
             {
-                // Enable quick selecting of home apps from the notification bar
-                Util.showNotification( thisActivity );
+                // Enable quick selecting of home apps from the notification bar when allowed
+                if( Preferences.canPostNotifications( thisActivity ) )
+                {
+                    Util.showNotification( thisActivity );
+                }
             }
             else
             {

@@ -240,7 +240,7 @@ public class Util
         
         // Call intent
 //        PendingIntent pIntent = PendingIntent.getActivity( thisActivity, 0, thisActivity.getIntent(), 0 );
-        Intent getQuickSelectIntent = new Intent( StaticConfig.QUICK_SELET_INTENT );
+        Intent getQuickSelectIntent = new Intent( activity, QuickSelectActivity.class );
         int pendingIntentFlags = 0;
         if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.M )
         {
@@ -268,7 +268,7 @@ public class Util
 
         Notification quickSelectNotification = builder.setContentTitle( activity.getResources().getString( R.string.quickSelect ) )
                                                       .setContentText( activity.getResources().getString( R.string.selectHomeApp ) )
-                                                      .setSmallIcon( R.drawable.icon )
+                                                      .setSmallIcon( R.drawable.ic_stat_home_manager )
                                                       .setContentIntent( pQuickSelect )
                                                       .setOngoing( true )
                                                       .build();
