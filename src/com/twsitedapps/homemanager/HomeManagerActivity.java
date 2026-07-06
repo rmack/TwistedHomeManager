@@ -270,6 +270,17 @@ public class HomeManagerActivity extends Activity
                     }
                 }
             } );
+
+            // Preferences
+            Button btnPreferences = (Button) findViewById( R.id.btnPreferences );
+            btnPreferences.setOnClickListener( new View.OnClickListener() 
+            {
+                public void onClick( View v )
+                {
+                    Intent preferencesIntent = new Intent( thisActivity, Preferences.class );
+                    startActivity( preferencesIntent );
+                }
+            } );
         }
         catch ( NullPointerException e )
         {
@@ -415,8 +426,7 @@ public class HomeManagerActivity extends Activity
         }
         case R.id.preferences:
         {
-            Intent preferencesIntent = new Intent();
-            preferencesIntent.setAction( StaticConfig.PREFERENCES_INTENT );
+            Intent preferencesIntent = new Intent( thisActivity, Preferences.class );
             startActivity( preferencesIntent );
 
             return_value = true;

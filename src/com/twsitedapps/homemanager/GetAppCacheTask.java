@@ -42,16 +42,16 @@ import android.widget.ArrayAdapter;
  */
 class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
 {
-    private final static String      DEBUG_TAG                = GetAppCacheTask.class.getSimpleName();
-    
+    private final static String DEBUG_TAG = GetAppCacheTask.class.getSimpleName();
+
     // Used to make use of the package manager
-    private PackageManager           pm                       = null;
-    private Context                  context                  = null;
-    private ArrayAdapter<AppInfo>    arrayAdapter             = null;
-    private boolean                  isFinishedBuildingList   = false;
-    
+    private PackageManager        pm                     = null;
+    private Context               context                = null;
+    private ArrayAdapter<AppInfo> arrayAdapter           = null;
+    private boolean               isFinishedBuildingList = false;
+
     // The cached list of installed home applications
-    public ArrayList<AppInfo> listAppInfo;
+    public ArrayList<AppInfo>     listAppInfo;
     
     
     /*****************************************************************************

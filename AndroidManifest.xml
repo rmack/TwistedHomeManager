@@ -69,14 +69,7 @@
 			        android:name=".Preferences"
 			        android:label="@string/set_preferences"
 			        android:noHistory="true"
-			        android:exported="false">
-		    <intent-filter>
-                <action   android:name="com.twsitedapps.homemanager.action.PREFERENCES" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.ALTERNATIVE" />
-                <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
-            </intent-filter>
-		</activity>
+			        android:exported="false" />
 		
         <receiver 
             android:name=".MainBroadcastReceiver"
