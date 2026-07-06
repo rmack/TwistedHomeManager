@@ -35,10 +35,10 @@ allprojects {
         jcenter()
 
         // Fallback to Google Maven directly - Android 15
-        maven { url "https://maven.google.com" }
+        maven { url = uri( "https://maven.google.com" ) }
 
         // Required for PhoneLocal - implementation ("com.github.joielechong:countrycodepicker:2.4.1")
-        maven { url "https://jitpack.io" }
+        maven { url = uri( "https://jitpack.io" ) }
 
     }
 }

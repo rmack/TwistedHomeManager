@@ -21,6 +21,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:fitsSystemWindows="true"
     >
 	        <LinearLayout
 			    android:id="@+id/btnLLayout"
@@ -47,6 +48,13 @@
 		            android:layout_height="wrap_content"
 		            android:layout_weight="1"
 		            android:text="@string/getHome">
+		        </Button>
+		        <Button
+		            android:id="@+id/btnPreferences"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="1"
+		            android:text="⚙">
 		        </Button>
 		</LinearLayout>
 

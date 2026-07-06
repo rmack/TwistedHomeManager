@@ -95,6 +95,11 @@ public class QuickSelectActivity extends Activity
             {
                 public boolean onItemLongClick( AdapterView<?> parent, View view, int position, long id )
                 {
+                    if( listAppInfo == null || position < 0 || position >= listAppInfo.size() )
+                    {
+                        return ( true );
+                    }
+
                     // Get the name of the current selected home app
                     String name = listAppInfo.get( position ).getappName();
     
@@ -127,6 +132,11 @@ public class QuickSelectActivity extends Activity
                 {
                     try
                     {
+                        if( listAppInfo == null || position < 0 || position >= listAppInfo.size() )
+                        {
+                            return;
+                        }
+
                         // Get the name of the current selected home app
                         String name = listAppInfo.get( position ).getappName();
     

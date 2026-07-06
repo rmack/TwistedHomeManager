@@ -105,6 +105,18 @@ public class Util
     
     
     /*****************************************************************************
+     * canReadOtherAppMemory - Check if Android allows this app to display memory
+     * for other apps.
+     * 
+     * @return boolean - true if memory can be read, false otherwise
+     */
+    public static boolean canReadOtherAppMemory()
+    {
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.Q;
+    } // End canReadOtherAppMemory
+    
+    
+    /*****************************************************************************
      * getPkgMemory - Get the package's memory given it's PID
      * 
      * @param pid - int - The application's PID
@@ -228,7 +240,7 @@ public class Util
         
         // Call intent
 //        PendingIntent pIntent = PendingIntent.getActivity( thisActivity, 0, thisActivity.getIntent(), 0 );
-        Intent getQuickSelectIntent = new Intent( StaticConfig.QUICK_SELET_INTENT );
+        Intent getQuickSelectIntent = new Intent( activity, QuickSelectActivity.class );
         int pendingIntentFlags = 0;
         if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.M )
         {
@@ -256,7 +268,7 @@ public class Util
 
         Notification quickSelectNotification = builder.setContentTitle( activity.getResources().getString( R.string.quickSelect ) )
                                                       .setContentText( activity.getResources().getString( R.string.selectHomeApp ) )
-                                                      .setSmallIcon( R.drawable.icon )
+                                                      .setSmallIcon( R.drawable.ic_stat_home_manager )
                                                       .setContentIntent( pQuickSelect )
                                                       .setOngoing( true )
                                                       .build();

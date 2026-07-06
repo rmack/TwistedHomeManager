@@ -165,7 +165,15 @@ public class HomeManagerArrayAdapter extends ArrayAdapter<AppInfo>
                 // Display app values set
                 holder.txt_appName.setText( listAppInfo.get( position ).getappName().trim() );
                 holder.txt_versionName.setText( listAppInfo.get( position ).getversionName() );
-                holder.txt_memoryName.setText( listAppInfo.get( position ).getappMemory() );
+                if( listAppInfo.get( position ).getappMemory().equals( "" ) )
+                {
+                    holder.txt_memoryName.setVisibility( View.GONE );
+                }
+                else
+                {
+                    holder.txt_memoryName.setVisibility( View.VISIBLE );
+                    holder.txt_memoryName.setText( listAppInfo.get( position ).getappMemory() );
+                }
 
                 // Set the image if it was cached
                 holder.iconDrawable.setImageDrawable( listAppInfo.get( position ).geticonDrawable() );
