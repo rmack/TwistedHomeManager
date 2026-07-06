@@ -2,7 +2,6 @@
 <resources>
     <style name="CustomButton" parent="android:style/Theme.NoTitleBar">
         <item name="android:buttonStyle">@style/Button</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
     </style>
     
     <style name="Transparent" parent="android:Theme">

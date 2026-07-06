@@ -254,8 +254,18 @@ public class HomeManagerActivity extends Activity
                         try
                         {
                             // Start the Market App Activity
-                            Intent getHomeIntent = new Intent( thisActivity, GetHomeActivity.class );
-                            startActivity( getHomeIntent );
+                            Intent getHomeIntent = new Intent( StaticConfig.GETHOME_INTENT );
+                            
+                            if( Util.isCallable( thisActivity, getHomeIntent ) )
+                            { 
+                                // Start Process Image activity
+                                startActivity( getHomeIntent );
+                            }
+                            else
+                            {
+                                // Display user feedback if the home app is not callable
+                                Toast.makeText( getApplicationContext(), getResources().getString( R.string.homeAppNotCallable ), Toast.LENGTH_SHORT ).show();
+                            }
                         }
                         catch ( ActivityNotFoundException e )
                         {
@@ -268,17 +278,6 @@ public class HomeManagerActivity extends Activity
                         // Display user feedback
                         Toast.makeText( getApplicationContext(), getResources().getString( R.string.please_wait ), Toast.LENGTH_SHORT ).show();
                     }
-                }
-            } );
-
-            // Preferences
-            Button btnPreferences = (Button) findViewById( R.id.btnPreferences );
-            btnPreferences.setOnClickListener( new View.OnClickListener() 
-            {
-                public void onClick( View v )
-                {
-                    Intent preferencesIntent = new Intent( thisActivity, Preferences.class );
-                    startActivity( preferencesIntent );
                 }
             } );
         }
@@ -328,11 +327,8 @@ public class HomeManagerActivity extends Activity
             // Check if the Notification should be shown
             if ( PreferenceManager.getDefaultSharedPreferences( thisActivity ).getBoolean( StaticConfig.NOTIFICATION_KEY, true ) )
             {
-                // Enable quick selecting of home apps from the notification bar when allowed
-                if( Preferences.canPostNotifications( thisActivity ) )
-                {
-                    Util.showNotification( thisActivity );
-                }
+                // Enable quick selecting of home apps from the notification bar
+                Util.showNotification( thisActivity );
             }
             else
             {
@@ -429,7 +425,8 @@ public class HomeManagerActivity extends Activity
         }
         case R.id.preferences:
         {
-            Intent preferencesIntent = new Intent( thisActivity, Preferences.class );
+            Intent preferencesIntent = new Intent();
+            preferencesIntent.setAction( StaticConfig.PREFERENCES_INTENT );
             startActivity( preferencesIntent );
 
             return_value = true;

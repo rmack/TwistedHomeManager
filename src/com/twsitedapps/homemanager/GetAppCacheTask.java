@@ -42,16 +42,16 @@ import android.widget.ArrayAdapter;
  */
 class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
 {
-    private final static String DEBUG_TAG = GetAppCacheTask.class.getSimpleName();
-
+    private final static String      DEBUG_TAG                = GetAppCacheTask.class.getSimpleName();
+    
     // Used to make use of the package manager
-    private PackageManager        pm                     = null;
-    private Context               context                = null;
-    private ArrayAdapter<AppInfo> arrayAdapter           = null;
-    private boolean               isFinishedBuildingList = false;
-
+    private PackageManager           pm                       = null;
+    private Context                  context                  = null;
+    private ArrayAdapter<AppInfo>    arrayAdapter             = null;
+    private boolean                  isFinishedBuildingList   = false;
+    
     // The cached list of installed home applications
-    public ArrayList<AppInfo>     listAppInfo;
+    public ArrayList<AppInfo> listAppInfo;
     
     
     /*****************************************************************************
@@ -59,7 +59,7 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
      * 
      * @param context - Context - The Activity's context
      * @param listAppInfo - ArrayList<AppInfo> To fill out
-     * @param arrayAdapter - The Array Adapter for the Home manager list
+     * @param homeManagerArrayAdapter - The Array Adapter for the Home manager list
      * @param isFinishedBuildingList - boolean if list is finished being built
      */
     public GetAppCacheTask( Context context, 
@@ -88,12 +88,8 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
         // Default app if one exists
         String defaultPackageName = "none";
         
-        // Get the running process memory if Android still exposes useful values.
-        HashMap<String, Integer> pidMap = new HashMap<String, Integer>();
-        if( Util.canReadOtherAppMemory() )
-        {
-            pidMap = Util.getRunningProcess( this.context );
-        }
+        // Get the running process memory
+        HashMap<String, Integer> pidMap = Util.getRunningProcess( this.context );
 
         try
         {
@@ -138,10 +134,10 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
                     boolean isDefaultApp  = true;
                     
                     // Get this packages memory if it is running
-                    String memory = "";
-                    if ( Util.canReadOtherAppMemory() && pidMap.get( defaultPackageName ) != null )
+                    int memory = 0;
+                    if ( pidMap.get( defaultPackageName ) != null )
                     {
-                        memory = String.valueOf( Util.getPkgMemory( pidMap.get( defaultPackageName ), this.context ) ) + "M";
+                        memory = Util.getPkgMemory( pidMap.get( defaultPackageName ), this.context );
                     }
                     
                     // Permissions to display
@@ -179,7 +175,7 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
                     AppInfo appInfo = new AppInfo( appName,
                                                    versionName,
                                                    defaultPackageName,
-                                                   memory,
+                                                   String.valueOf( memory ) + "M",
                                                    iconDrawable,
                                                    isDefaultApp,
                                                    startAtBoot,
@@ -237,7 +233,7 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
                         }
                         
                         // Check if the app has network permissions
-	                        if ( pm.checkPermission( Manifest.permission.INTERNET, packageName ) == PackageManager.PERMISSION_GRANTED )
+                        if ( pm.checkPermission( Manifest.permission.INTERNET, packageName ) == 0 )
                         {
                             WiFi = true;
                         }
@@ -256,16 +252,16 @@ class GetAppCacheTask extends AsyncTask<Void, HashMap<String, AppInfo>, Integer>
                         }
                         
                         // Get this packages memory if it is running
-                        String memory = "";
-                        if ( Util.canReadOtherAppMemory() && pidMap.get( packageName ) != null )
+                        int memory = 0;
+                        if ( pidMap.get( packageName ) != null )
                         {
-                            memory = String.valueOf( Util.getPkgMemory( pidMap.get( packageName ), this.context ) ) + "M";
+                            memory = Util.getPkgMemory( pidMap.get( packageName ), this.context );
                         }
                         
                         AppInfo appInfo = new AppInfo( appName,
                                                        versionName,
                                                        packageName,
-                                                       memory,
+                                                       String.valueOf( memory ) + "M",
                                                        iconDrawable,
                                                        isDefaultApp,
                                                        startAtBoot,

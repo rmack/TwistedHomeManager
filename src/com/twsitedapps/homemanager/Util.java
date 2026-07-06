@@ -73,18 +73,6 @@ public class Util
         return list.size() > 0;
     } // End isCallable
 
-
-    /*****************************************************************************
-     * canReadOtherAppMemory - Check if Android still exposes useful memory data
-     * for other apps.
-     * 
-     * @return boolean - Other app memory can be shown (true) or not (false)
-     */
-    public static boolean canReadOtherAppMemory()
-    {
-        return ( Build.VERSION.SDK_INT < Build.VERSION_CODES.Q );
-    } // End canReadOtherAppMemory
-
     
     /*****************************************************************************
      * getRunningProcess - Get a list of running processes
@@ -240,7 +228,7 @@ public class Util
         
         // Call intent
 //        PendingIntent pIntent = PendingIntent.getActivity( thisActivity, 0, thisActivity.getIntent(), 0 );
-        Intent getQuickSelectIntent = new Intent( activity, QuickSelectActivity.class );
+        Intent getQuickSelectIntent = new Intent( StaticConfig.QUICK_SELET_INTENT );
         int pendingIntentFlags = 0;
         if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.M )
         {
@@ -268,7 +256,7 @@ public class Util
 
         Notification quickSelectNotification = builder.setContentTitle( activity.getResources().getString( R.string.quickSelect ) )
                                                       .setContentText( activity.getResources().getString( R.string.selectHomeApp ) )
-                                                      .setSmallIcon( R.drawable.ic_stat_home_manager )
+                                                      .setSmallIcon( R.drawable.icon )
                                                       .setContentIntent( pQuickSelect )
                                                       .setOngoing( true )
                                                       .build();

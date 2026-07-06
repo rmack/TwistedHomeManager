@@ -19,6 +19,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.13.2'
@@ -31,12 +32,13 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        jcenter()
 
         // Fallback to Google Maven directly - Android 15
-        maven { url = uri( "https://maven.google.com" ) }
+        maven { url "https://maven.google.com" }
 
         // Required for PhoneLocal - implementation ("com.github.joielechong:countrycodepicker:2.4.1")
-        maven { url = uri( "https://jitpack.io" ) }
+        maven { url "https://jitpack.io" }
 
     }
 }
